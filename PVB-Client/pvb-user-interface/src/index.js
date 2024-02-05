@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { render } from 'react-dom';
 import _ from 'lodash';
 import './index.css';
+
 import 'semantic-ui-css/semantic.min.css';
 import {
   Button,
@@ -15,6 +16,9 @@ import {
   PlaceholderHeader,
   PlaceholderImage,
   PlaceholderLine,
+  MessageHeader,
+  Message,
+  Grid,
 } from 'semantic-ui-react';
 
 const cards = [
@@ -42,12 +46,28 @@ const cards = [
   },
 ]
 
+const InvalidOperationMessage = () => (
+  <Message>
+    <MessageHeader>වලංගු නොවන මෙහෙයුම | Invalid Operation | தவறான செயல்பாடு</MessageHeader>
+    <p>
+      ඔබ වලංගු නොවන මෙහෙයුමක් සිදු කර ඇත කරුණාකර නිවැරදි විකල්පය තෝරන්න!
+    </p>
+    <p>
+      You have performed an invalid operation please click on the correct option!
+    </p>
+    <p>
+      நீங்கள் தவறான செயலைச் செய்துள்ளீர்கள், சரியான விருப்பத்தைத் தேர்வுசெய்க!
+    </p>
+  </Message>
+)
+
 const VotingUI = () => {
   const [loading] = useState(false);
   const [voteForOption1, setVoteForOption1] = useState(0);
   const [voteForOption2, setVoteForOption2] = useState(0);
   const [voteForOption3, setVoteForOption3] = useState(0);
-  
+  const [voted, setVotedFlag] = useState(false);
+
   return (
     <>
       <Divider />
@@ -55,21 +75,20 @@ const VotingUI = () => {
       <Divider />
       <CardGroup doubling itemsPerRow={3} stackable>
         {_.map(cards, (card) => (
-          <Card key={card.header1}>
-
+          <Card>
             {loading ? (
               <Placeholder>
                 <PlaceholderImage square />
               </Placeholder>
             ) : (
-              <Image src={card.avatar} style={{ height: 100, width: 100 }} />
+              <Image src={card.avatar} style={{ height: 75, width: 75 }} />
             )}
 
             <CardContent>
               {loading ? (
                 <Placeholder>
                   <PlaceholderHeader>
-                    <PlaceholderLine length='very short' />
+                    <PlaceholderLine length='medium' />
                     <PlaceholderLine length='medium' />
                   </PlaceholderHeader>
                 </Placeholder>
@@ -83,29 +102,47 @@ const VotingUI = () => {
             </CardContent>
 
             <CardContent extra>
-              <Button disabled={(card.id === 'option_1' && voteForOption1 >= 1) || (card.id === 'option_2' && voteForOption2 >= 1) || (card.id === 'option_3' && voteForOption3 >= 1)}
-                onClick={() => card.id === 'option_1' ?
-                  setVoteForOption1(voteForOption1 + 1)
-                  : card.id === 'option_2' && voteForOption2 < 1 ?
-                    setVoteForOption2(voteForOption2 + 1)
-                    : setVoteForOption3(voteForOption3 + 1)}
+              <Button name='castVote' disabled={voted}
+                onClick={() => [
+                  card.id === 'option_1' && voteForOption1 < 1 ?
+                    setVoteForOption1(voteForOption1 + 1)
+                    : card.id === 'option_2' && voteForOption2 < 1 ?
+                      setVoteForOption2(voteForOption2 + 1)
+                      : card.id === 'option_3' && voteForOption3 < 1 ?
+                        setVoteForOption3(voteForOption3 + 1)
+                        : InvalidOperationMessage, setVotedFlag(true)
+                ]}
                 primary>
                 චන්දය ප්‍රකාශ කරන්න | Cast Vote | ஓட்டு போடுங்கள்
               </Button>
               <Divider />
-              <Button disabled={(card.id === 'option_1' && voteForOption1 < 1) || (card.id === 'option_2' && voteForOption2 < 1) || (card.id === 'option_3' && voteForOption3 < 1)}
-                onClick={() => card.id === 'option_1' && voteForOption1 > 0 ?
-                  setVoteForOption1(voteForOption1 - 1)
-                  : card.id === 'option_2' ?
-                    setVoteForOption2(voteForOption2 - 1)
-                    : setVoteForOption3(voteForOption3 - 1)}
-                primary>
-                චන්දය අවලංගු කරන්න | Cancel Vote | வாக்கை ரத்து செய்
-              </Button>
             </CardContent>
           </Card>
         ))}
       </CardGroup>
+      <Divider style={{ height: '5vh' }} />
+      <Grid  textAlign='center' verticalAlign='middle'>
+        <Button name='confirmVote' disabled={!voted} color='teal'
+          onClick={() => [
+            //vote confirmation method
+          ]}
+          primary>
+          චන්දය තහවුරු කරන්න | Confirm Vote | உறுதி வாக்கு
+        </Button>
+        <Button name='cancelVote' disabled={!voted} color='red'
+          onClick={() => [
+            voteForOption1 > 0 ?
+              setVoteForOption1(voteForOption1 - 1)
+              : voteForOption2 > 0 ?
+                setVoteForOption2(voteForOption2 - 1)
+                : voteForOption3 > 0 ?
+                  setVoteForOption3(voteForOption3 - 1)
+                  : InvalidOperationMessage, setVotedFlag(false)
+          ]}
+          primary>
+          චන්දය අවලංගු කරන්න | Cancel Vote | வாக்கை ரத்து செய்
+        </Button>
+      </Grid>
     </>
   );
 };
