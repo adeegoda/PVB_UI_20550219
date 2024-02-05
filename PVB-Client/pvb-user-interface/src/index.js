@@ -43,26 +43,15 @@ const cards = [
 ]
 
 const VotingUI = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [voteForOption1, setVoteForOption1] = useState(0);
   const [voteForOption2, setVoteForOption2] = useState(0);
   const [voteForOption3, setVoteForOption3] = useState(0);
-  const handleLoadingClick = () => {
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 2500)
-  }
+  
   return (
     <>
-      <Button loading={loading} onClick={handleLoadingClick} primary>
-        Refresh | නැවුම් කරන්න | புதுப்பிப்பு
-      </Button>
       <Divider />
-      {voteForOption1}
-      {voteForOption2}
-      {voteForOption3}
+      {voteForOption1} - {voteForOption2} - {voteForOption3}
       <Divider />
       <CardGroup doubling itemsPerRow={3} stackable>
         {_.map(cards, (card) => (
@@ -94,22 +83,23 @@ const VotingUI = () => {
             </CardContent>
 
             <CardContent extra>
-              <Button disabled={loading}
+              <Button disabled={(card.id === 'option_1' && voteForOption1 >= 1) || (card.id === 'option_2' && voteForOption2 >= 1) || (card.id === 'option_3' && voteForOption3 >= 1)}
                 onClick={() => card.id === 'option_1' ?
                   setVoteForOption1(voteForOption1 + 1)
-                  : card.id === 'option_2' ?
+                  : card.id === 'option_2' && voteForOption2 < 1 ?
                     setVoteForOption2(voteForOption2 + 1)
                     : setVoteForOption3(voteForOption3 + 1)}
                 primary>
                 චන්දය ප්‍රකාශ කරන්න | Cast Vote | ஓட்டு போடுங்கள்
               </Button>
               <Divider />
-              <Button disabled={loading}
-                onClick={() => card.id === 'option_1' ?
+              <Button disabled={(card.id === 'option_1' && voteForOption1 < 1) || (card.id === 'option_2' && voteForOption2 < 1) || (card.id === 'option_3' && voteForOption3 < 1)}
+                onClick={() => card.id === 'option_1' && voteForOption1 > 0 ?
                   setVoteForOption1(voteForOption1 - 1)
                   : card.id === 'option_2' ?
                     setVoteForOption2(voteForOption2 - 1)
-                    : setVoteForOption3(voteForOption3 - 1)} primary>
+                    : setVoteForOption3(voteForOption3 - 1)}
+                primary>
                 චන්දය අවලංගු කරන්න | Cancel Vote | வாக்கை ரத்து செய்
               </Button>
             </CardContent>
