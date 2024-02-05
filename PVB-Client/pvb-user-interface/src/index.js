@@ -1,108 +1,151 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import { render } from 'react-dom';
 import _ from 'lodash';
 import './index.css';
+
 import 'semantic-ui-css/semantic.min.css';
 import {
   Button,
   Card,
   CardContent,
-  CardDescription,
   CardGroup,
   CardHeader,
-  CardMeta,
   Divider,
   Image,
   Placeholder,
   PlaceholderHeader,
   PlaceholderImage,
   PlaceholderLine,
-  PlaceholderParagraph,
+  MessageHeader,
+  Message,
+  Grid,
 } from 'semantic-ui-react';
 
 const cards = [
   {
-    avatar: '/images/avatar/large/helen.jpg',
-    date: 'Joined in 2013',
-    header: 'Helen',
-    description: 'Primary Contact',
+    id: 'option_1',
+    avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/NPP_Symbol.png/100px-NPP_Symbol.png',
+    header1: "ජාතික ජන බලවේගය",
+    header2: "National People's Power",
+    header3: "தேசிய மக்கள் சக்தி",
+
   },
   {
-    avatar: '/images/avatar/large/matthew.png',
-    date: 'Joined in 2013',
-    header: 'Matthew',
-    description: 'Primary Contact',
+    id: 'option_2',
+    avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Samagi_Jana_Balawegaya_-_Telephone_Symbol_-_Black.png/180px-Samagi_Jana_Balawegaya_-_Telephone_Symbol_-_Black.png',
+    header1: "සමගි ජනබලවේගය",
+    header2: "Samagi Jana Balawegaya",
+    header3: "ஐக்கிய மக்கள் சக்தி",
   },
   {
-    avatar: '/images/avatar/large/molly.png',
-    date: 'Joined in 2013',
-    header: 'Molly',
-    description: 'Primary Contact',
+    id: 'option_3',
+    avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Sri_Lanka_Podujana_Peramuna_election_symbol.svg/125px-Sri_Lanka_Podujana_Peramuna_election_symbol.svg.png',
+    header1: "ශ්‍රී ලංකා පොදුජන පෙරමුණ",
+    header2: "Sri Lanka Podujana Peramuna ",
+    header3: "இலங்கை பொதுஜன முன்னணி",
   },
 ]
 
+const InvalidOperationMessage = () => (
+  <Message>
+    <MessageHeader>වලංගු නොවන මෙහෙයුම | Invalid Operation | தவறான செயல்பாடு</MessageHeader>
+    <p>
+      ඔබ වලංගු නොවන මෙහෙයුමක් සිදු කර ඇත කරුණාකර නිවැරදි විකල්පය තෝරන්න!
+    </p>
+    <p>
+      You have performed an invalid operation please click on the correct option!
+    </p>
+    <p>
+      நீங்கள் தவறான செயலைச் செய்துள்ளீர்கள், சரியான விருப்பத்தைத் தேர்வுசெய்க!
+    </p>
+  </Message>
+)
+
 const VotingUI = () => {
-  const [loading, setLoading] = useState(false);
-  const handleLoadingClick = () => {
-    setLoading(true);
+  const [loading] = useState(false);
+  const [voteForOption1, setVoteForOption1] = useState(0);
+  const [voteForOption2, setVoteForOption2] = useState(0);
+  const [voteForOption3, setVoteForOption3] = useState(0);
+  const [voted, setVotedFlag] = useState(false);
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000)
-  }
-
-  return <>
-    <Button loading={loading} onClick={handleLoadingClick} primary>
-      Simulate loading
-    </Button>
-    <Divider />
-
-    <CardGroup doubling itemsPerRow={3} stackable>
-      {_.map(cards, (card) => (
-        <Card key={card.header}>
-          {loading ? (
-            <Placeholder>
-              <PlaceholderImage square />
-            </Placeholder>
-          ) : (
-            <Image src={card.avatar} />
-          )}
-
-          <CardContent>
+  return (
+    <>
+      <Divider />
+      {voteForOption1} - {voteForOption2} - {voteForOption3}
+      <Divider />
+      <CardGroup doubling itemsPerRow={3} stackable>
+        {_.map(cards, (card) => (
+          <Card>
             {loading ? (
               <Placeholder>
-                <PlaceholderHeader>
-                  <PlaceholderLine length='very short' />
-                  <PlaceholderLine length='medium' />
-                </PlaceholderHeader>
-                <PlaceholderParagraph>
-                  <PlaceholderLine length='short' />
-                </PlaceholderParagraph>
+                <PlaceholderImage square />
               </Placeholder>
             ) : (
-              <>
-                <CardHeader>{card.header}</CardHeader>
-                <CardMeta>{card.date}</CardMeta>
-                <CardDescription>{card.description}</CardDescription>
-              </>
+              <Image src={card.avatar} style={{ height: 75, width: 75 }} />
             )}
-          </CardContent>
 
-          <CardContent extra>
-            <Button disabled={loading} primary>
-              Add
-            </Button>
-            <Button disabled={loading}>Delete</Button>
-          </CardContent>
-        </Card>
-      ))}
-    </CardGroup>
-  </>
+            <CardContent>
+              {loading ? (
+                <Placeholder>
+                  <PlaceholderHeader>
+                    <PlaceholderLine length='medium' />
+                    <PlaceholderLine length='medium' />
+                  </PlaceholderHeader>
+                </Placeholder>
+              ) : (
+                <>
+                  <CardHeader>{card.header1}</CardHeader>
+                  <CardHeader>{card.header2}</CardHeader>
+                  <CardHeader>{card.header3}</CardHeader>
+                </>
+              )}
+            </CardContent>
+
+            <CardContent extra>
+              <Button name='castVote' disabled={voted}
+                onClick={() => [
+                  card.id === 'option_1' && voteForOption1 < 1 ?
+                    setVoteForOption1(voteForOption1 + 1)
+                    : card.id === 'option_2' && voteForOption2 < 1 ?
+                      setVoteForOption2(voteForOption2 + 1)
+                      : card.id === 'option_3' && voteForOption3 < 1 ?
+                        setVoteForOption3(voteForOption3 + 1)
+                        : InvalidOperationMessage, setVotedFlag(true)
+                ]}
+                primary>
+                චන්දය ප්‍රකාශ කරන්න | Cast Vote | ஓட்டு போடுங்கள்
+              </Button>
+              <Divider />
+            </CardContent>
+          </Card>
+        ))}
+      </CardGroup>
+      <Divider style={{ height: '5vh' }} />
+      <Grid  textAlign='center' verticalAlign='middle'>
+        <Button name='confirmVote' disabled={!voted} color='teal'
+          onClick={() => [
+            //vote confirmation method
+          ]}
+          primary>
+          චන්දය තහවුරු කරන්න | Confirm Vote | உறுதி வாக்கு
+        </Button>
+        <Button name='cancelVote' disabled={!voted} color='red'
+          onClick={() => [
+            voteForOption1 > 0 ?
+              setVoteForOption1(voteForOption1 - 1)
+              : voteForOption2 > 0 ?
+                setVoteForOption2(voteForOption2 - 1)
+                : voteForOption3 > 0 ?
+                  setVoteForOption3(voteForOption3 - 1)
+                  : InvalidOperationMessage, setVotedFlag(false)
+          ]}
+          primary>
+          චන්දය අවලංගු කරන්න | Cancel Vote | வாக்கை ரத்து செய்
+        </Button>
+      </Grid>
+    </>
+  );
 };
 
 render(<VotingUI />, document.querySelector('#root'));
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
