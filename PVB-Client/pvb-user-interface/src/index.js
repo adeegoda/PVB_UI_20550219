@@ -22,22 +22,23 @@ import {
 
 const cards = [
   {
-    avatar: '/images/avatar/large/helen.jpg',
-    date: 'Joined in 2013',
-    header: 'Helen',
-    description: 'Primary Contact',
+    avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/NPP_Symbol.png/100px-NPP_Symbol.png',
+    header1: "ජාතික ජන බලවේගය",
+    header2: "National People's Power",
+    header3: "தேசிய மக்கள் சக்தி",
+    
   },
   {
-    avatar: '/images/avatar/large/matthew.png',
-    date: 'Joined in 2013',
-    header: 'Matthew',
-    description: 'Primary Contact',
+    avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Samagi_Jana_Balawegaya_-_Telephone_Symbol_-_Black.png/180px-Samagi_Jana_Balawegaya_-_Telephone_Symbol_-_Black.png',
+    header1: "සමගි ජනබලවේගය",
+    header2: "Samagi Jana Balawegaya",
+    header3: "ஐக்கிய மக்கள் சக்தி",
   },
   {
-    avatar: '/images/avatar/large/molly.png',
-    date: 'Joined in 2013',
-    header: 'Molly',
-    description: 'Primary Contact',
+    avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Sri_Lanka_Podujana_Peramuna_election_symbol.svg/125px-Sri_Lanka_Podujana_Peramuna_election_symbol.svg.png',
+    header1: "ශ්‍රී ලංකා පොදුජන පෙරමුණ",
+    header2: "Sri Lanka Podujana Peramuna ",
+    header3: "இலங்கை பொதுஜன முன்னணி",
   },
 ]
 
@@ -53,7 +54,7 @@ const VotingUI = () => {
 
   return <>
     <Button loading={loading} onClick={handleLoadingClick} primary>
-      Simulate loading
+      Refresh | නැවුම් කරන්න | புதுப்பிப்பு 
     </Button>
     <Divider />
 
@@ -65,7 +66,7 @@ const VotingUI = () => {
               <PlaceholderImage square />
             </Placeholder>
           ) : (
-            <Image src={card.avatar} />
+            <Image src={card.avatar} style={{ height: 100, width: 100 }} />
           )}
 
           <CardContent>
@@ -81,18 +82,18 @@ const VotingUI = () => {
               </Placeholder>
             ) : (
               <>
-                <CardHeader>{card.header}</CardHeader>
+                <CardHeader>{card.header1}</CardHeader>
+                <CardHeader>{card.header2}</CardHeader>
+                <CardHeader>{card.header3}</CardHeader>
                 <CardMeta>{card.date}</CardMeta>
                 <CardDescription>{card.description}</CardDescription>
               </>
             )}
           </CardContent>
-
           <CardContent extra>
             <Button disabled={loading} primary>
-              Add
+              ප්‍රකාශ කරන්න | Vote | வாக்கு
             </Button>
-            <Button disabled={loading}>Delete</Button>
           </CardContent>
         </Card>
       ))}
@@ -101,8 +102,4 @@ const VotingUI = () => {
 };
 
 render(<VotingUI />, document.querySelector('#root'));
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
