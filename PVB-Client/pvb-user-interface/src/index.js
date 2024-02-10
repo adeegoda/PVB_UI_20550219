@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { render } from 'react-dom';
 import _ from 'lodash';
 import './index.css';
+import axios from 'axios';
 
 import 'semantic-ui-css/semantic.min.css';
 import {
