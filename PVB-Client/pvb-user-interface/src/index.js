@@ -74,6 +74,43 @@ const VotingUI = () => {
   const [voted, setVotedFlag] = useState(false);
   const [open, setOpenConfirmation] = useState(false)
 
+  const SubmitBallot = () => {
+    axios
+      .post("", {
+        option_1: voteForOption1,
+        option_2: voteForOption2,
+        option_3: voteForOption3
+      })
+      .then(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+
+  const CancelVoteValidation = () => {
+    voteForOption1 > 0 ?
+      setVoteForOption1(voteForOption1 - 1)
+      : voteForOption2 > 0 ?
+        setVoteForOption2(voteForOption2 - 1)
+        : voteForOption3 > 0 ?
+          setVoteForOption3(voteForOption3 - 1)
+          : InvalidOperationMessage()
+  };
+
+  const VoteSelectionValidation = (card) => {
+    card.id === 'option_1' && voteForOption1 < 1 ?
+      setVoteForOption1(voteForOption1 + 1)
+      : card.id === 'option_2' && voteForOption2 < 1 ?
+        setVoteForOption2(voteForOption2 + 1)
+        : card.id === 'option_3' && voteForOption3 < 1 ?
+          setVoteForOption3(voteForOption3 + 1)
+          : InvalidOperationMessage()
+  };
+
   return (
     <>
       <Divider />
@@ -110,13 +147,9 @@ const VotingUI = () => {
             <CardContent extra>
               <Button name='castVote' disabled={voted}
                 onClick={() => [
-                  card.id === 'option_1' && voteForOption1 < 1 ?
-                    setVoteForOption1(voteForOption1 + 1)
-                    : card.id === 'option_2' && voteForOption2 < 1 ?
-                      setVoteForOption2(voteForOption2 + 1)
-                      : card.id === 'option_3' && voteForOption3 < 1 ?
-                        setVoteForOption3(voteForOption3 + 1)
-                        : InvalidOperationMessage, setVotedFlag(true), setOpenConfirmation(true)
+                  VoteSelectionValidation(card),
+                  setVotedFlag(true),
+                  setOpenConfirmation(true)
                 ]}
                 primary>
                 චන්දය ප්‍රකාශ කරන්න | Cast Vote | ஓட்டு போடுங்கள்
@@ -142,7 +175,9 @@ const VotingUI = () => {
         <ModalActions>
           <Button name='confirmVote' disabled={!voted} positive
             onClick={() => [
-              //vote confirmation method
+              setOpenConfirmation(false),
+              SubmitBallot(),
+              setVotedFlag(true)
             ]}
             primary>
             <Icon name='checkmark' />
@@ -150,13 +185,9 @@ const VotingUI = () => {
           </Button>
           <Button name='cancelVote' disabled={!voted} negative
             onClick={() => [
-              voteForOption1 > 0 ?
-                setVoteForOption1(voteForOption1 - 1)
-                : voteForOption2 > 0 ?
-                  setVoteForOption2(voteForOption2 - 1)
-                  : voteForOption3 > 0 ?
-                    setVoteForOption3(voteForOption3 - 1)
-                    : InvalidOperationMessage, setVotedFlag(false), setOpenConfirmation(false)
+              CancelVoteValidation(),
+              setVotedFlag(false),
+              setOpenConfirmation(false)
             ]}
             primary>
             <Icon name='remove' />
@@ -169,4 +200,3 @@ const VotingUI = () => {
 };
 
 render(<VotingUI />, document.querySelector('#root'));
-
