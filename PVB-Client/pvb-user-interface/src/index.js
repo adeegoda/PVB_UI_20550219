@@ -74,7 +74,7 @@ const VotingUI = () => {
   const [voted, setVotedFlag] = useState(false);
   const [open, setOpenConfirmation] = useState(false)
 
-  const SubmitBallot = () => {
+  const SubmitConfirmedVote = () => {
     axios
       .post("", {
         option_1: voteForOption1,
@@ -91,7 +91,7 @@ const VotingUI = () => {
       );
   };
 
-  const CancelVoteValidation = () => {
+  const CancelVote = () => {
     voteForOption1 > 0 ?
       setVoteForOption1(voteForOption1 - 1)
       : voteForOption2 > 0 ?
@@ -101,7 +101,7 @@ const VotingUI = () => {
           : InvalidOperationMessage()
   };
 
-  const VoteSelectionValidation = (card) => {
+  const SelectionVote = (card) => {
     card.id === 'option_1' && voteForOption1 < 1 ?
       setVoteForOption1(voteForOption1 + 1)
       : card.id === 'option_2' && voteForOption2 < 1 ?
@@ -147,7 +147,7 @@ const VotingUI = () => {
             <CardContent extra>
               <Button name='castVote' disabled={voted}
                 onClick={() => [
-                  VoteSelectionValidation(card),
+                  SelectionVote(card),
                   setVotedFlag(true),
                   setOpenConfirmation(true)
                 ]}
@@ -176,7 +176,7 @@ const VotingUI = () => {
           <Button name='confirmVote' disabled={!voted} positive
             onClick={() => [
               setOpenConfirmation(false),
-              SubmitBallot(),
+              SubmitConfirmedVote(),
               setVotedFlag(true)
             ]}
             primary>
@@ -185,7 +185,7 @@ const VotingUI = () => {
           </Button>
           <Button name='cancelVote' disabled={!voted} negative
             onClick={() => [
-              CancelVoteValidation(),
+              CancelVote(),
               setVotedFlag(false),
               setOpenConfirmation(false)
             ]}
