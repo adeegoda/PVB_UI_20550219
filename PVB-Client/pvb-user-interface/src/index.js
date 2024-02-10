@@ -18,7 +18,11 @@ import {
   PlaceholderLine,
   MessageHeader,
   Message,
-  Grid,
+  ModalContent,
+  ModalActions,
+  Header,
+  Icon,
+  Modal,
 } from 'semantic-ui-react';
 
 const cards = [
@@ -67,6 +71,7 @@ const VotingUI = () => {
   const [voteForOption2, setVoteForOption2] = useState(0);
   const [voteForOption3, setVoteForOption3] = useState(0);
   const [voted, setVotedFlag] = useState(false);
+  const [open, setOpenConfirmation] = useState(false)
 
   return (
     <>
@@ -110,7 +115,7 @@ const VotingUI = () => {
                       setVoteForOption2(voteForOption2 + 1)
                       : card.id === 'option_3' && voteForOption3 < 1 ?
                         setVoteForOption3(voteForOption3 + 1)
-                        : InvalidOperationMessage, setVotedFlag(true)
+                        : InvalidOperationMessage, setVotedFlag(true), setOpenConfirmation(true)
                 ]}
                 primary>
                 චන්දය ප්‍රකාශ කරන්න | Cast Vote | ஓட்டு போடுங்கள்
@@ -120,29 +125,44 @@ const VotingUI = () => {
           </Card>
         ))}
       </CardGroup>
-      <Divider style={{ height: '5vh' }} />
-      <Grid  textAlign='center' verticalAlign='middle'>
-        <Button name='confirmVote' disabled={!voted} color='teal'
-          onClick={() => [
-            //vote confirmation method
-          ]}
-          primary>
-          චන්දය තහවුරු කරන්න | Confirm Vote | உறுதி வாக்கு
-        </Button>
-        <Button name='cancelVote' disabled={!voted} color='red'
-          onClick={() => [
-            voteForOption1 > 0 ?
-              setVoteForOption1(voteForOption1 - 1)
-              : voteForOption2 > 0 ?
-                setVoteForOption2(voteForOption2 - 1)
-                : voteForOption3 > 0 ?
-                  setVoteForOption3(voteForOption3 - 1)
-                  : InvalidOperationMessage, setVotedFlag(false)
-          ]}
-          primary>
-          චන්දය අවලංගු කරන්න | Cancel Vote | வாக்கை ரத்து செய்
-        </Button>
-      </Grid>
+      <Modal
+        onOpen={() => setOpenConfirmation(true)}
+        open={open}
+        size='small'
+      >
+        <Header>
+          චන්දය තහවුරු කිරීම | Confirming Vote | வாக்கை உறுதிப்படுத்துகிறது
+        </Header>
+        <ModalContent>
+          <p>
+            ඔබගේ චන්දය තහවුරු කරන්නේද? | Do You Confirm Your Vote? | உங்கள் வாக்கை உறுதிப்படுத்துகிறீர்களா?
+          </p>
+        </ModalContent>
+        <ModalActions>
+          <Button name='confirmVote' disabled={!voted} positive
+            onClick={() => [
+              //vote confirmation method
+            ]}
+            primary>
+            <Icon name='checkmark' />
+            ඔව් | Yes | ஆம்
+          </Button>
+          <Button name='cancelVote' disabled={!voted} negative
+            onClick={() => [
+              voteForOption1 > 0 ?
+                setVoteForOption1(voteForOption1 - 1)
+                : voteForOption2 > 0 ?
+                  setVoteForOption2(voteForOption2 - 1)
+                  : voteForOption3 > 0 ?
+                    setVoteForOption3(voteForOption3 - 1)
+                    : InvalidOperationMessage, setVotedFlag(false), setOpenConfirmation(false)
+            ]}
+            primary>
+            <Icon name='remove' />
+            නැත | No | இல்லை
+          </Button>
+        </ModalActions>
+      </Modal>
     </>
   );
 };
