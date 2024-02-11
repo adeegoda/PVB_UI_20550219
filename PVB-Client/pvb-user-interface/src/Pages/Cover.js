@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../Resources/coverPage.css';
 import { Link } from 'react-router-dom';
-import EBallotUI from './EBallot';
+
 
 const PVB_CoverUI = () => {
     return (
