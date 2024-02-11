@@ -24,6 +24,7 @@ import {
     Icon,
     Modal,
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const cards = [
     {
@@ -72,6 +73,7 @@ const PVB_EBallotUI = () => {
     const [voteForOption3, setVoteForOption3] = useState(0);
     const [voted, setVotedFlag] = useState(false);
     const [open, setOpenConfirmation] = useState(false)
+    const [completed, setOpenFinishVoting] = useState(false)
 
     const SubmitConfirmedVote = () => {
         axios
@@ -176,7 +178,8 @@ const PVB_EBallotUI = () => {
                         onClick={() => [
                             setOpenConfirmation(false),
                             SubmitConfirmedVote(),
-                            setVotedFlag(true)
+                            setVotedFlag(true),
+                            setOpenFinishVoting(true)
                         ]}
                         primary>
                         <Icon name='checkmark' />
@@ -192,6 +195,32 @@ const PVB_EBallotUI = () => {
                         <Icon name='remove' />
                         නැත | No | இல்லை
                     </Button>
+                </ModalActions>
+            </Modal>
+            <Modal
+                onOpen={() => setOpenFinishVoting(true)}
+                open={completed}
+                size='small'
+            >
+                <Header>
+                    චන්දය අවසාන කිරීම | Finish Vote Process | வாக்களிப்பதை முடிக்கவும்
+                </Header>
+                <ModalContent>
+                    <p>
+                        චන්ද ප්‍රකාශය සාර්ථකයි<br />Vote Process Success<br />வாக்களிப்பு செயல்முறை வெற்றி
+                    </p>
+                </ModalContent>
+                <ModalActions>
+                    <Link to='/cover'>
+                        <Button name='finishVote' disabled={!voted} positive
+                            onClick={() => [
+                                setOpenFinishVoting(false)
+                            ]}
+                            primary>
+                            <Icon name='checkmark' />
+                            අවසානයි | Finish | முடிக்கவும்
+                        </Button>
+                    </Link>
                 </ModalActions>
             </Modal>
         </>

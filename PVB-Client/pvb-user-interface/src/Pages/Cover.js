@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
-import logo from '../Resources/logo.svg';
 import '../Resources/coverPage.css';
+import { Link } from 'react-router-dom';
+import EBallotUI from './EBallot';
 
 const PVB_CoverUI = () => {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-            </header>
+        <div>
+            <h1>
+                <Link to='/votingUI'>
+                    <p>
+                        චන්ද ප්‍රකාශය ආරම්භ කරන්න<br />
+                        Start Casting Vote<br />
+                        வாக்களிக்கத் தொடங்குங்கள்<br />
+                    </p>
+                </Link>
+            </h1>
         </div>
     );
 }
