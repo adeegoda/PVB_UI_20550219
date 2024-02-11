@@ -162,7 +162,6 @@ const PVB_EBallotUI = () => {
                 ))}
             </CardGroup>
             <Modal
-                centered={false}
                 onOpen={() => setOpenConfirmation(true)}
                 open={open}
                 size='small'
