@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { render } from 'react-dom';
 import _ from 'lodash';
 import './index.css';
 import axios from 'axios';
@@ -66,7 +65,7 @@ const InvalidOperationMessage = () => (
     </Message>
 )
 
-const EBallotUI = () => {
+const PVB_EBallotUI = () => {
     const [loading] = useState(false);
     const [voteForOption1, setVoteForOption1] = useState(0);
     const [voteForOption2, setVoteForOption2] = useState(0);
@@ -199,4 +198,4 @@ const EBallotUI = () => {
     );
 };
 
-export default EBallotUI;
+export default PVB_EBallotUI;
