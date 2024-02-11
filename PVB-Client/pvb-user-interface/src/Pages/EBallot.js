@@ -72,8 +72,8 @@ const PVB_EBallotUI = () => {
     const [voteForOption2, setVoteForOption2] = useState(0);
     const [voteForOption3, setVoteForOption3] = useState(0);
     const [voted, setVotedFlag] = useState(false);
-    const [open, setOpenConfirmation] = useState(false)
-    const [completed, setOpenFinishVoting] = useState(false)
+    const [open, setOpenConfirmation] = useState(false);
+    const [completed, setOpenFinishVoting] = useState(false);
 
     const SubmitConfirmedVote = () => {
         axios
@@ -154,6 +154,7 @@ const PVB_EBallotUI = () => {
                                 ]}
                                 primary>
                                 චන්දය ප්‍රකාශ කරන්න | Cast Vote | ஓட்டு போடுங்கள்
+
                             </Button>
                             <Divider />
                         </CardContent>
@@ -161,6 +162,7 @@ const PVB_EBallotUI = () => {
                 ))}
             </CardGroup>
             <Modal
+                centered={false}
                 onOpen={() => setOpenConfirmation(true)}
                 open={open}
                 size='small'
