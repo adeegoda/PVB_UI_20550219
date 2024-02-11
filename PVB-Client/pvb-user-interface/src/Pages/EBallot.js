@@ -211,7 +211,7 @@ const PVB_EBallotUI = () => {
                     </p>
                 </ModalContent>
                 <ModalActions>
-                    <Link to='/cover'>
+                    <Link to='/coverUI'>
                         <Button name='finishVote' disabled={!voted} positive
                             onClick={() => [
                                 setOpenFinishVoting(false)

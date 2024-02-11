@@ -10,7 +10,7 @@ const PVB_MainUI = () => {
       <div>
         <Switch>
           <Route exact path="/" component={CoverUI} />
-          <Route path="/cover" component={CoverUI} />
+          <Route path="/coverUI" component={CoverUI} />
           <Route path="/votingUI" component={EBallotUI} />
         </Switch>
       </div>
