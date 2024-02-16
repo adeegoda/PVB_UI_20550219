@@ -1,8 +1,0 @@
-https://en.wikipedia.org/wiki/List_of_political_parties_in_Sri_Lanka
-https://react.semantic-ui.com/elements/placeholder/#types-card
-
-vote
-(card.id === 'option_1' && voteForOption1 >= 1) || (card.id === 'option_2' && voteForOption2 >= 1) || (card.id === 'option_3' && voteForOption3 >= 1)
-
-unvote
-(card.id === 'option_1' && voteForOption1 < 1) || (card.id === 'option_2' && voteForOption2 < 1) || (card.id === 'option_3' && voteForOption3 < 1)
