@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CoverUI from './Pages/Cover';
-import EBallotUI from './Pages/EBallot';
+import EBallotUI from './Pages/EBallot_New';
 import IdVerificationUI from './Pages/IdVerification';
 
 const PVB_MainUI = () => {

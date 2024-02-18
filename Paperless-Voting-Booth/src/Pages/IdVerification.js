@@ -18,11 +18,13 @@ const PVB_IdVerificationUI = () => {
                     <input name="nic_number" placeholder="Enter NIC Number" />
                 </div>
                 <div className="nic_verification_button">
-                    <button name="verify_nic_number">
-                        තහවුරු කරන්න <br />
-                        Verify<br />
-                        சரிபார்க்கவும்<br />
-                    </button>
+                    <Link to='/votingUI'>
+                        <button name="verify_nic_number">
+                            තහවුරු කරන්න <br />
+                            Verify<br />
+                            சரிபார்க்கவும்<br />
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>
