@@ -77,7 +77,7 @@ const PVB_EBallotUI = () => {
 
     const SubmitConfirmedVote = () => {
         axios
-            .post("", {
+            .post("http://localhost:4000/api/submitBallots", {
                 option_1: voteForOption1,
                 option_2: voteForOption2,
                 option_3: voteForOption3
