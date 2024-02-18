@@ -78,6 +78,7 @@ const PVB_EBallotUI = () => {
     const SubmitConfirmedVote = () => {
         axios
             .post("http://localhost:4000/api/submitBallots", {
+                voter_id:"151352198415V",
                 option_1: voteForOption1,
                 option_2: voteForOption2,
                 option_3: voteForOption3
@@ -90,6 +91,7 @@ const PVB_EBallotUI = () => {
                     console.log(error);
                 }
             );
+            // .get('http://localhost:4000/');
     };
 
     const CancelVote = () => {
