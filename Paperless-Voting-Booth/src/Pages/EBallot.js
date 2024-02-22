@@ -66,7 +66,7 @@ const InvalidOperationMessage = () => (
     </Message>
 )
 
-const PVB_EBallotUI = () => {
+const PVB_EBallotUI = (props) => {
     const [loading] = useState(false);
     const [voteForOption1, setVoteForOption1] = useState(0);
     const [voteForOption2, setVoteForOption2] = useState(0);
@@ -78,7 +78,7 @@ const PVB_EBallotUI = () => {
     const SubmitConfirmedVote = () => {
         axios
             .post("http://localhost:4000/api/submitBallots", {
-                voter_id:"151352198415V",
+                voter_id: props.location.state.nicNumber,
                 option_1: voteForOption1,
                 option_2: voteForOption2,
                 option_3: voteForOption3
@@ -91,7 +91,6 @@ const PVB_EBallotUI = () => {
                     console.log(error);
                 }
             );
-            // .get('http://localhost:4000/');
     };
 
     const CancelVote = () => {
