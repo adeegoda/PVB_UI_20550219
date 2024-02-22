@@ -7,7 +7,7 @@ const PVB_CoverUI = () => {
     return (
         <div>
             <h1>
-                <Link to='/idVerificationUI'>
+                <Link to='/idVerificationUI' class="coverPage">
                     <p>
                         චන්ද ප්‍රකාශය ආරම්භ කරන්න<br />
                         Start Casting Vote<br />

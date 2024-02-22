@@ -11,10 +11,7 @@ const ConfirmationModal = ({
     setVotedFlag,
     voteForOption1,
     voteForOption2,
-    voteForOption3,
-    setVoteForOption1,
-    setVoteForOption2,
-    setVoteForOption3
+    voteForOption3
 }) => {
     const SubmitConfirmedVote = () => {
         axios
@@ -46,8 +43,8 @@ const ConfirmationModal = ({
                 : voteForOption3 > 0 ?
                     voteForOption3 = voteForOption3 - 1
                     : InvalidOperationMessage()
-        setVotedFlag(false);
         setOpenConfirmation(false);
+        setVotedFlag(false);
     };
 
     return (

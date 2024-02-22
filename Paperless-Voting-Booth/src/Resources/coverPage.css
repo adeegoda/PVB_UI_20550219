@@ -1,14 +1,14 @@
-a::before {
+.coverPage::before {
   transform: scaleX(0);
   transform-origin: bottom right;
 }
 
-a:hover::before {
+.coverPage:hover::before {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
 
-a::before {
+.coverPage::before {
   content: " ";
   display: block;
   position: absolute;
@@ -22,7 +22,7 @@ a::before {
   transition: transform .3s ease;
 }
 
-a {
+.coverPage {
   position: relative;
   font-size: 5rem;
 }
