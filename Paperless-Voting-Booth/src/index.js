@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CoverUI from './Pages/Cover';
 import EBallotUI from './Pages/EBallot';
+import IdVerificationUI from './Pages/IdVerification';
 
 const PVB_MainUI = () => {
   return (
@@ -11,6 +12,7 @@ const PVB_MainUI = () => {
         <Switch>
           <Route exact path="/" component={CoverUI} />
           <Route path="/coverUI" component={CoverUI} />
+          <Route path="/idVerificationUI" component={IdVerificationUI}></Route>
           <Route path="/votingUI" component={EBallotUI} />
         </Switch>
       </div>
