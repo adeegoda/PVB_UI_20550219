@@ -3,7 +3,8 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CoverUI from './Pages/Cover';
 import EBallotUI from './Pages/EBallot';
-import IdVerificationUI from './Pages/IdVerification';
+import VerifyOTP from './Pages/VerifyOTP';
+import GenerateOTP from './Pages/GenerateOTP';
 
 const PVB_MainUI = () => {
   return (
@@ -11,8 +12,9 @@ const PVB_MainUI = () => {
       <div>
         <Switch>
           <Route exact path="/" component={CoverUI} />
+          <Route path="/generateOTP" component={GenerateOTP} />
           <Route path="/coverUI" component={CoverUI} />
-          <Route path="/idVerificationUI" component={IdVerificationUI}></Route>
+          <Route path="/otpVerificationUI" component={VerifyOTP} />
           <Route path="/votingUI" component={EBallotUI} />
         </Switch>
       </div>

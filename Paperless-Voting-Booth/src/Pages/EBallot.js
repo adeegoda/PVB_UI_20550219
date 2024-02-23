@@ -66,7 +66,7 @@ const InvalidOperationMessage = () => (
     </Message>
 )
 
-const PVB_EBallotUI = (props) => {
+const PVB_EBallotUI = () => {
     const [loading] = useState(false);
     const [voteForOption1, setVoteForOption1] = useState(0);
     const [voteForOption2, setVoteForOption2] = useState(0);
@@ -78,7 +78,6 @@ const PVB_EBallotUI = (props) => {
     const SubmitConfirmedVote = () => {
         axios
             .post("http://localhost:4000/api/submitBallots", {
-                voter_id: props.location.state.nicNumber,
                 option_1: voteForOption1,
                 option_2: voteForOption2,
                 option_3: voteForOption3
@@ -115,9 +114,6 @@ const PVB_EBallotUI = (props) => {
 
     return (
         <>
-            <Divider />
-            {voteForOption1} - {voteForOption2} - {voteForOption3}
-            <Divider />
             <CardGroup doubling itemsPerRow={3} stackable>
                 {_.map(cards, (card) => (
                     <Card>
