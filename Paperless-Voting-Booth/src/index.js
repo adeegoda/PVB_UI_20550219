@@ -14,7 +14,7 @@ const PVB_MainUI = () => {
           <Route exact path="/" component={CoverUI} />
           <Route path="/generateOTP" component={GenerateOTP} />
           <Route path="/coverUI" component={CoverUI} />
-          <Route path="/idVerificationUI" component={VerifyOTP} />
+          <Route path="/otpVerificationUI" component={VerifyOTP} />
           <Route path="/votingUI" component={EBallotUI} />
         </Switch>
       </div>
