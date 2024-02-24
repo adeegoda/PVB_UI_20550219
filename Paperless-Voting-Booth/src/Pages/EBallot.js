@@ -3,7 +3,6 @@ import _ from 'lodash';
 import axios from 'axios';
 import 'semantic-ui-css/semantic.min.css';
 import { CardGroup } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import Card from '../Modals/Card';
 import InvalidOperationMessage from '../Modals/InvalidOperationMessage';
 import ConfirmationModal from '../Modals/ConfirmationModal';
