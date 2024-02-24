@@ -11,7 +11,7 @@ import FinishVotingModal from '../Modals/FinishVotingModal';
 const cards = [
     {
         id: 'option_1',
-        party_code:'NPP',
+        party_code: 'NPP',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/NPP_Symbol.png/100px-NPP_Symbol.png',
         header1: "ජාතික ජන බලවේගය",
         header2: "National People's Power",
@@ -19,7 +19,7 @@ const cards = [
     },
     {
         id: 'option_2',
-        party_code:'SJB',
+        party_code: 'SJB',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Samagi_Jana_Balawegaya_-_Telephone_Symbol_-_Black.png/180px-Samagi_Jana_Balawegaya_-_Telephone_Symbol_-_Black.png',
         header1: "සමගි ජනබලවේගය",
         header2: "Samagi Jana Balawegaya",
@@ -27,7 +27,7 @@ const cards = [
     },
     {
         id: 'option_3',
-        party_code:'SLPP',
+        party_code: 'SLPP',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Sri_Lanka_Podujana_Peramuna_election_symbol.svg/125px-Sri_Lanka_Podujana_Peramuna_election_symbol.svg.png',
         header1: "ශ්‍රී ලංකා පොදුජන පෙරමුණ",
         header2: "Sri Lanka Podujana Peramuna ",
@@ -57,13 +57,18 @@ const PVB_EBallotUI = () => {
     };
 
     const CancelVote = () => {
-        setSelectedPartyCode();
+        try {
+            setSelectedPartyCode('');
+        } catch (error) {
+            InvalidOperationMessage();
+        }
     };
 
+
     const SelectionVote = (card) => {
-        if (selectedPartyCode === '') {
+        try {
             setSelectedPartyCode(card.party_code);
-        } else {
+        } catch (error) {
             InvalidOperationMessage();
         }
     };
