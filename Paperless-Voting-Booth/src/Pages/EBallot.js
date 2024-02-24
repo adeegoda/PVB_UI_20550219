@@ -10,7 +10,6 @@ import FinishVotingModal from '../Modals/FinishVotingModal';
 
 const cards = [
     {
-        id: 'option_1',
         party_code: 'NPP',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/NPP_Symbol.png/100px-NPP_Symbol.png',
         header1: "ජාතික ජන බලවේගය",
@@ -18,7 +17,6 @@ const cards = [
         header3: "தேசிய மக்கள் சக்தி",
     },
     {
-        id: 'option_2',
         party_code: 'SJB',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Samagi_Jana_Balawegaya_-_Telephone_Symbol_-_Black.png/180px-Samagi_Jana_Balawegaya_-_Telephone_Symbol_-_Black.png',
         header1: "සමගි ජනබලවේගය",
@@ -26,7 +24,6 @@ const cards = [
         header3: "ஐக்கிய மக்கள் சக்தி",
     },
     {
-        id: 'option_3',
         party_code: 'SLPP',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Sri_Lanka_Podujana_Peramuna_election_symbol.svg/125px-Sri_Lanka_Podujana_Peramuna_election_symbol.svg.png',
         header1: "ශ්‍රී ලංකා පොදුජන පෙරමුණ",
@@ -63,7 +60,6 @@ const PVB_EBallotUI = () => {
             InvalidOperationMessage();
         }
     };
-
 
     const SelectionVote = (card) => {
         try {
