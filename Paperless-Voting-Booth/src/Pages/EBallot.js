@@ -11,6 +11,7 @@ import FinishVotingModal from '../Modals/FinishVotingModal';
 const cards = [
     {
         id: 'option_1',
+        party_code:'NPP',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/NPP_Symbol.png/100px-NPP_Symbol.png',
         header1: "ජාතික ජන බලවේගය",
         header2: "National People's Power",
@@ -18,6 +19,7 @@ const cards = [
     },
     {
         id: 'option_2',
+        party_code:'SJB',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Samagi_Jana_Balawegaya_-_Telephone_Symbol_-_Black.png/180px-Samagi_Jana_Balawegaya_-_Telephone_Symbol_-_Black.png',
         header1: "සමගි ජනබලවේගය",
         header2: "Samagi Jana Balawegaya",
@@ -25,6 +27,7 @@ const cards = [
     },
     {
         id: 'option_3',
+        party_code:'SLPP',
         avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Sri_Lanka_Podujana_Peramuna_election_symbol.svg/125px-Sri_Lanka_Podujana_Peramuna_election_symbol.svg.png',
         header1: "ශ්‍රී ලංකා පොදුජන පෙරමුණ",
         header2: "Sri Lanka Podujana Peramuna ",
@@ -34,18 +37,14 @@ const cards = [
 
 const PVB_EBallotUI = () => {
     const [loading] = useState(false);
-    const [voteForOption1, setVoteForOption1] = useState(0);
-    const [voteForOption2, setVoteForOption2] = useState(0);
-    const [voteForOption3, setVoteForOption3] = useState(0);
+    const [selectedPartyCode, setSelectedPartyCode] = useState('');
     const [voted, setVotedFlag] = useState(false);
     const [openConfirmation, setOpenConfirmation] = useState(false);
     const [openFinishVoting, setOpenFinishVoting] = useState(false);
 
     const SubmitConfirmedVote = () => {
         axios.post("http://localhost:4000/api/submitBallots", {
-            option_1: voteForOption1,
-            option_2: voteForOption2,
-            option_3: voteForOption3
+            party_code: selectedPartyCode
         })
             .then(
                 (response) => {
@@ -58,23 +57,15 @@ const PVB_EBallotUI = () => {
     };
 
     const CancelVote = () => {
-        voteForOption1 > 0 ?
-            setVoteForOption1(voteForOption1 - 1)
-            : voteForOption2 > 0 ?
-                setVoteForOption2(voteForOption2 - 1)
-                : voteForOption3 > 0 ?
-                    setVoteForOption3(voteForOption3 - 1)
-                    : InvalidOperationMessage();
+        setSelectedPartyCode();
     };
 
     const SelectionVote = (card) => {
-        card.id === 'option_1' && voteForOption1 < 1 ?
-            setVoteForOption1(voteForOption1 + 1)
-            : card.id === 'option_2' && voteForOption2 < 1 ?
-                setVoteForOption2(voteForOption2 + 1)
-                : card.id === 'option_3' && voteForOption3 < 1 ?
-                    setVoteForOption3(voteForOption3 + 1)
-                    : InvalidOperationMessage();
+        if (selectedPartyCode === '') {
+            setSelectedPartyCode(card.party_code);
+        } else {
+            InvalidOperationMessage();
+        }
     };
 
     return (
