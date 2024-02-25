@@ -13,7 +13,7 @@ const PVB_EBallotUI = () => {
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/pvb-api/party-cards')
+        axios.get("http://localhost:4000/pvb-api/party-cards")
             .then(response => {
                 setCards(response.data);
                 setLoading(false);
