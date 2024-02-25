@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../Resources/otpGenerationPage.css';
 
 const PVB_OTPGenerationUI = () => {
     const [otp, setOtp] = useState('');
@@ -19,9 +20,24 @@ const PVB_OTPGenerationUI = () => {
     };
 
     return (
-        <div>
-            <h1>OTP: {otp}</h1>
-            <button onClick={generateOTP}>Generate OTP</button>
+        <div className="container">
+            <h2>
+                <p>
+                    OTP අංකයක් නිපදවන්න <br />
+                    Generate OTP Number <br />
+                    OTP எண்ணை உருவாக்கவும்<br />
+                </p>
+            </h2>
+            <div className="centered">
+                <label>{otp}</label>
+                <div name="otp-generate" className='otp_label_field'>
+                    <button onClick={generateOTP} className='otp_generate_button'>
+                        නිපදවන්න<br />
+                        Generate<br />
+                        உருவாக்கு<br />
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }

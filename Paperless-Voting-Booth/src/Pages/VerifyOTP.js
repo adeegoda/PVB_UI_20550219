@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import '../Resources/idVerificationPage.css';
+import '../Resources/otpVerificationPage.css';
 
 function VerifyOTP() {
     const [otp, setOtp] = useState('');
@@ -53,7 +53,7 @@ function VerifyOTP() {
                     {errorMessage && <div className="error-message">{errorMessage}</div>}
                 </div>
                 <div className="otp_verification_button"></div>
-                <button onClick={handleOTPVerification}>
+                <button onClick={handleOTPVerification} className='otp_input_button'>
                     තහවුරු කරන්න <br />
                     Verify<br />
                     சரிபார்க்கவும்<br />
