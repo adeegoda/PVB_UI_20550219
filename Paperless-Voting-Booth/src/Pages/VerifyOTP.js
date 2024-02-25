@@ -15,7 +15,7 @@ function VerifyOTP() {
         }
 
         try {
-            const response = await fetch('http://localhost:4000/validate-otp', {
+            const response = await fetch('http://localhost:4000/pvb-api/validate-otp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

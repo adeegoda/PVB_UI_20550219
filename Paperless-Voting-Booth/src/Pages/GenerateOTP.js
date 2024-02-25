@@ -4,7 +4,7 @@ const PVB_OTPGenerationUI = () => {
     const [otp, setOtp] = useState('');
     const generateOTP = async () => {
         try {
-            const response = await fetch("http://localhost:4000/generate-otp", {
+            const response = await fetch("http://localhost:4000/pvb-api/generate-otp", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

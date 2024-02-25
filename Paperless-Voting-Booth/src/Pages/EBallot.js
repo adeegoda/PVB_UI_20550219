@@ -13,7 +13,7 @@ const PVB_EBallotUI = () => {
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/party-cards')
+        axios.get('http://localhost:4000/pvb-api/party-cards')
             .then(response => {
                 setCards(response.data);
                 setLoading(false);
@@ -30,7 +30,7 @@ const PVB_EBallotUI = () => {
     const [openFinishVoting, setOpenFinishVoting] = useState(false);
 
     const SubmitConfirmedVote = () => {
-        axios.post("http://localhost:4000/api/submitBallots", {
+        axios.post("http://localhost:4000/pvb-api/submitBallots", {
             party_code: selectedPartyCode
         })
             .then(
