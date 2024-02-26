@@ -7,13 +7,14 @@ export const validateOTP = async (history, otp, setErrorMessage) => {
         const response = await fetch("http://localhost:4000/pvb-api/validate-otp", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'voter-otp': otp,
             },
             body: JSON.stringify({ otp: otp })
         });
         const data = await response.json();
         if (response.status === 202) {
-            history.push('/votingUI');
+            return data.message;
         }
         return data.message;
     } catch (error) {

@@ -8,6 +8,7 @@ function VerifyOTP() {
     const [otp, setOtp] = useState('');
     const [verificationResult, setVerificationResult] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [otpValidated, setOTPValidated] = useState(false);
     const history = useHistory();
     const [electionDetails, setElectionDetails] = useState([]);
 
@@ -22,6 +23,9 @@ function VerifyOTP() {
 
     const handleOTPVerification = async () => {
         const validatedResult = await validateOTP(history, otp, setErrorMessage);
+        if (validatedResult === 'OTP is valid') {
+            setOTPValidated(true);
+        }
         setVerificationResult(validatedResult);
     };
 
@@ -30,6 +34,12 @@ function VerifyOTP() {
         setOtp(inputVal);
         setErrorMessage('');
     };
+
+    useEffect(() => {
+        if (otpValidated) {
+            history.replace('/votingUI');
+        }
+    }, [otpValidated, history]);
 
     return (
         <div>

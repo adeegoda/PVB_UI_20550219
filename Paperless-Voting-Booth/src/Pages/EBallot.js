@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import _ from 'lodash';
 import 'semantic-ui-css/semantic.min.css';
 import { CardGroup } from 'semantic-ui-react';
@@ -33,6 +34,8 @@ const PVB_EBallotUI = () => {
     const [voted, setVotedFlag] = useState(false);
     const [openConfirmation, setOpenConfirmation] = useState(false);
     const [openFinishVoting, setOpenFinishVoting] = useState(false);
+    const [votingCompleted, setVotingCompleted] = useState(false);
+    const history = useHistory();
 
     const CancelVote = () => {
         try {
@@ -49,6 +52,12 @@ const PVB_EBallotUI = () => {
             InvalidOperationMessage();
         }
     };
+
+    useEffect(() => {
+        if (votingCompleted) {
+            history.replace('/coverUI');
+        }
+    }, [votingCompleted, history]);
 
     return (
         <>
@@ -98,7 +107,7 @@ const PVB_EBallotUI = () => {
 
             <FinishVotingModal
                 open={openFinishVoting}
-                onClose={() => setOpenFinishVoting(false)}
+                onClose={() => { setOpenFinishVoting(false); setVotingCompleted(true); }}
                 voted={voted}
                 setOpenFinishVoting={setOpenFinishVoting}
             />
