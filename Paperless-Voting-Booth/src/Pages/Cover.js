@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import '../Resources/coverPage.css';
 import { Link } from 'react-router-dom';
-import { fetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
+import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 
 
 const PVB_CoverUI = () => {
     const [electionDetails, setElectionDetails] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
-            const data = await fetchElectionDetails();
+            const data = await FetchElectionDetails();
             setElectionDetails(data);
         };
 

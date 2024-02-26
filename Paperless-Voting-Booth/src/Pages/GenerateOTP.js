@@ -1,22 +1,12 @@
 import React, { useState } from 'react';
 import '../Resources/otpGenerationPage.css';
+import { generateOTP } from '../APIOperators/OTPGenerationAPI';
 
 const PVB_OTPGenerationUI = () => {
     const [otp, setOtp] = useState('');
-    const generateOTP = async () => {
-        try {
-            const response = await fetch("http://localhost:4000/pvb-api/generate-otp", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            const data = await response.json();
-            setOtp(data.otp);
-        } catch (error) {
-            console.error('Error generating OTP:', error);
-        }
+    const handleGenerateOTP = async () => {
+        const generatedOTP = await generateOTP();
+        setOtp(generatedOTP);
     };
 
     return (
@@ -31,7 +21,7 @@ const PVB_OTPGenerationUI = () => {
             <div className="centered">
                 <label>{otp}</label>
                 <div name="otp-generate" className='otp_label_field'>
-                    <button onClick={generateOTP} className='otp_generate_button'>
+                    <button onClick={handleGenerateOTP} className='otp_generate_button'>
                         නිපදවන්න<br />
                         Generate<br />
                         உருவாக்கு<br />
