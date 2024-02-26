@@ -1,0 +1,44 @@
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.otp_input_field {
+  margin-bottom: 10px;
+}
+
+.otp_input_button {
+  width: 200px;
+  height: 80px;
+  padding: 8px 16px;
+}
+
+input {
+  width: 400px;
+  height: 60px;
+  padding: 8px;
+  font-size: 50px;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

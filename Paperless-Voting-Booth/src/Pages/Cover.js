@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../Resources/coverPage.css';
 import { Link } from 'react-router-dom';
+import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 
 
 const PVB_CoverUI = () => {
+    const [electionDetails, setElectionDetails] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await FetchElectionDetails();
+            setElectionDetails(data);
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <div>
+            <div className="container">
+                <h2>
+                    {electionDetails.map(election => (
+                        <React.Fragment key={election._id}>
+                            {election.election_name_sinhala} | {election.election_name_english} | {election.election_name_tamil} - {election.election_year}
+                        </React.Fragment>
+                    ))}
+                </h2>
+            </div>
             <h1>
                 <Link to='/otpVerificationUI' class="coverPage">
                     <p>
@@ -16,6 +37,7 @@ const PVB_CoverUI = () => {
                 </Link>
             </h1>
         </div>
+
     );
 }
 
