@@ -6,6 +6,7 @@ import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 
 const PVB_CoverUI = () => {
     const [electionDetails, setElectionDetails] = useState([]);
+
     useEffect(() => {
         const fetchData = async () => {
             const data = await FetchElectionDetails();
