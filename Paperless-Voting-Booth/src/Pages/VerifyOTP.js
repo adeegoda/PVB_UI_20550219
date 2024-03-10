@@ -44,13 +44,13 @@ function VerifyOTP() {
     return (
         <div>
             <div className="centered">
-                <h2>
+                <h1>
                     {electionDetails.map(election => (
                         <React.Fragment key={election._id}>
                             {election.election_name_sinhala} | {election.election_name_english} | {election.election_name_tamil} - {election.election_year}
                         </React.Fragment>
                     ))}
-                </h2>
+                </h1>
             </div>
             <div className="container">
                 <h2>

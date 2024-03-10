@@ -16,6 +16,7 @@ const PVB_EBallotUI = () => {
     const [loading, setLoading] = useState(true);
     const [cards, setCards] = useState([]);
     const [electionDetails, setElectionDetails] = useState([]);
+    const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,6 +25,12 @@ const PVB_EBallotUI = () => {
         };
 
         fetchData();
+
+        const intervalId = setInterval(() => {
+            setCurrentDateTime(new Date());
+        }, 1000);
+
+        return () => clearInterval(intervalId);
     }, []);
 
     useEffect(() => {
@@ -59,15 +66,20 @@ const PVB_EBallotUI = () => {
         }
     }, [votingCompleted, history]);
 
+
+
     return (
         <>
             <div className="centered">
-                <h2>
+                <h1>
                     {electionDetails.map(election => (
                         <React.Fragment key={election._id}>
                             {election.election_name_sinhala} | {election.election_name_english} | {election.election_name_tamil} - {election.election_year}
                         </React.Fragment>
                     ))}
+                </h1>
+                <h2>
+                    {currentDateTime.toLocaleString()}
                 </h2>
             </div>
             <div className='container'>
