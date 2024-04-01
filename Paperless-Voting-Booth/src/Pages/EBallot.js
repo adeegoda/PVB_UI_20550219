@@ -8,6 +8,7 @@ import Card from '../Modals/Card';
 import InvalidOperationMessage from '../Modals/InvalidOperationMessage';
 import ConfirmationModal from '../Modals/ConfirmationModal';
 import FinishVotingModal from '../Modals/FinishVotingModal';
+import VoteAtteptExceedModal from '../Modals/VoteAtteptExceedModal';
 import { SubmitConfirmedVote } from '../APIOperators/BallotSubmitAPI';
 import { FetchPartyCards } from '../APIOperators/PartyCardsAPI';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
@@ -39,8 +40,10 @@ const PVB_EBallotUI = () => {
 
     const [selectedPartyCode, setSelectedPartyCode] = useState('');
     const [voted, setVotedFlag] = useState(false);
+    const [attepmted, setAttempt] = useState(false);
     const [openConfirmation, setOpenConfirmation] = useState(false);
     const [openFinishVoting, setOpenFinishVoting] = useState(false);
+    const [openVotingFailed, setOpenVotingFailed] = useState(false);
     const [votingCompleted, setVotingCompleted] = useState(false);
     const history = useHistory();
 
@@ -66,8 +69,6 @@ const PVB_EBallotUI = () => {
         }
     }, [votingCompleted, history]);
 
-
-
     return (
         <>
             <div className="centered">
@@ -80,6 +81,9 @@ const PVB_EBallotUI = () => {
                 </h1>
                 <h2>
                     {currentDateTime.toLocaleString()}
+                    <div>
+                        | voteAttempts |
+                    </div>
                 </h2>
             </div>
             <div className='container'>
@@ -109,8 +113,14 @@ const PVB_EBallotUI = () => {
                 }}
                 onCancel={() => {
                     CancelVote();
-                    setVotedFlag(false);
-                    setOpenConfirmation(false);
+                    setAttempt(true);
+                    if (!attepmted) {
+                        setOpenConfirmation(false);
+                        setOpenVotingFailed(true);
+                    } else {
+                        setVotedFlag(false);
+                        setOpenConfirmation(false);
+                    }
                 }}
                 voted={voted}
                 setVotedFlag={setVotedFlag}
@@ -119,6 +129,12 @@ const PVB_EBallotUI = () => {
 
             <FinishVotingModal
                 open={openFinishVoting}
+                onClose={() => { setOpenFinishVoting(false); setVotingCompleted(true); }}
+                voted={voted}
+                setOpenFinishVoting={setOpenFinishVoting}
+            />
+            <VoteAtteptExceedModal
+                open={openVotingFailed}
                 onClose={() => { setOpenFinishVoting(false); setVotingCompleted(true); }}
                 voted={voted}
                 setOpenFinishVoting={setOpenFinishVoting}
