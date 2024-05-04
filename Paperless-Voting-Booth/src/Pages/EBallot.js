@@ -81,9 +81,6 @@ const PVB_EBallotUI = () => {
                 </h1>
                 <h2>
                     {currentDateTime.toLocaleString()}
-                    <div>
-                        | voteAttempts |
-                    </div>
                 </h2>
             </div>
             <div className='container'>
