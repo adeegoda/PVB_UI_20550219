@@ -1,6 +1,6 @@
 export const validateOTP = async (history, otp, setErrorMessage) => {
     if (!/^[0-9]{6}$/.test(otp)) {
-        setErrorMessage('Invalid OTP format. Please enter a 6-digit numeric OTP.');
+        setErrorMessage('වලංගු නොවන OTP ආකෘතිය. කරුණාකර ඉලක්කම් 6ක සංඛ්‍යාත්මක OTP එකක් ඇතුළු කරන්න | Invalid OTP format. Please enter a 6-digit numeric OTP | தவறான OTP வடிவம். 6 இலக்க எண் OTP ஐ உள்ளிடவும்');
         return;
     }
     try {
