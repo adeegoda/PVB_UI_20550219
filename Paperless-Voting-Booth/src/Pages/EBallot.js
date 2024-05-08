@@ -122,6 +122,7 @@ const PVB_EBallotUI = () => {
                 voted={voted}
                 setVotedFlag={setVotedFlag}
                 setOpenFinishVoting={setOpenFinishVoting}
+                selectedOption={selectedPartyCode}
             />
 
             <FinishVotingModal
