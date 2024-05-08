@@ -1,4 +1,4 @@
-export const generateOTP = async (nic, setNicErrorMessage) => {
+export const generateOTP = async (nic, setNicErrorMessage, setOtpErrorMessage) => {
     if (nic != '') {
         if (!/^[0-9]{9}$/.test(nic)) {
             setNicErrorMessage('වලංගු නොවන NIC ආකෘතියකි | Invalid NIC format | தவறான NIC வடிவம்');
@@ -21,9 +21,11 @@ export const generateOTP = async (nic, setNicErrorMessage) => {
         if (response.status === 201) {
             return data.otp;
         } else {
-            return data.message;
+            setOtpErrorMessage(data.message)
+            return;
         }
     } catch (error) {
+        setOtpErrorMessage('Error generating OTP:', error)
         console.error('Error generating OTP:', error);
     }
 };

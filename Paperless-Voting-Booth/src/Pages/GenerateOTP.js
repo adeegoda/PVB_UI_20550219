@@ -8,6 +8,7 @@ const PVB_OTPGenerationUI = () => {
     const [otp, setOtp] = useState('');
     const [nic, setNic] = useState('');
     const [nicErrorMessage, setNicErrorMessage] = useState('');
+    const [otpErrorMessage, setOtpErrorMessage] = useState('');
     const [electionDetails, setElectionDetails] = useState([]);
 
     useEffect(() => {
@@ -20,7 +21,8 @@ const PVB_OTPGenerationUI = () => {
     }, []);
 
     const handleGenerateOTP = async () => {
-        const generatedOTP = await generateOTP(nic, setNicErrorMessage);
+        setOtpErrorMessage('');
+        const generatedOTP = await generateOTP(nic, setNicErrorMessage, setOtpErrorMessage);
         setOtp(generatedOTP);
     };
 
@@ -28,6 +30,7 @@ const PVB_OTPGenerationUI = () => {
         const inputVal = e.target.value;
         setNic(inputVal);
         setNicErrorMessage('');
+        setOtpErrorMessage('');
     };
 
     return (
@@ -63,6 +66,9 @@ const PVB_OTPGenerationUI = () => {
                 </h2>
                 <div className="centered">
                     <label>{otp}</label>
+                    <div>
+                        {otpErrorMessage && <div className="error-message">{otpErrorMessage}</div>}
+                    </div>
                     <div name="otp-generate" className='otp_label_field'>
                         <button onClick={handleGenerateOTP} className='otp_generate_button'>
                             නිපදවන්න<br />
