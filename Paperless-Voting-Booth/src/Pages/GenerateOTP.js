@@ -6,6 +6,8 @@ import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 
 const PVB_OTPGenerationUI = () => {
     const [otp, setOtp] = useState('');
+    const [nic, setNic] = useState('');
+    const [nicErrorMessage, setNicErrorMessage] = useState('');
     const [electionDetails, setElectionDetails] = useState([]);
 
     useEffect(() => {
@@ -18,8 +20,14 @@ const PVB_OTPGenerationUI = () => {
     }, []);
 
     const handleGenerateOTP = async () => {
-        const generatedOTP = await generateOTP();
+        const generatedOTP = await generateOTP(nic, setNicErrorMessage);
         setOtp(generatedOTP);
+    };
+
+    const handleNICChange = (e) => {
+        const inputVal = e.target.value;
+        setNic(inputVal);
+        setNicErrorMessage('');
     };
 
     return (
@@ -34,6 +42,18 @@ const PVB_OTPGenerationUI = () => {
                 </h1>
             </div>
             <div className="container">
+                <h2>
+                    <p>
+                        NIC අංකය ඇතුලත් කරන්න <br />
+                        Input NIC Number <br />
+                        NIC எண்ணை உள்ளிடவும்<br />
+                    </p>
+                </h2>
+                <div className="nic_input_field">
+                    <input type="text" value={nic} onChange={handleNICChange} />
+                    {nicErrorMessage && <div className="error-message">{nicErrorMessage}</div>}
+                </div>
+
                 <h2>
                     <p>
                         OTP අංකයක් නිපදවන්න <br />
