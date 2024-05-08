@@ -7,7 +7,7 @@ import VerifyOTP from './Pages/VerifyOTP';
 import GenerateOTP from './Pages/GenerateOTP';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
 
   return (
     <Route
