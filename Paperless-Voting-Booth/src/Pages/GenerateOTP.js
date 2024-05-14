@@ -6,6 +6,9 @@ import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 
 const PVB_OTPGenerationUI = () => {
     const [otp, setOtp] = useState('');
+    const [nic, setNic] = useState('');
+    const [nicErrorMessage, setNicErrorMessage] = useState('');
+    const [otpErrorMessage, setOtpErrorMessage] = useState('');
     const [electionDetails, setElectionDetails] = useState([]);
 
     useEffect(() => {
@@ -18,8 +21,16 @@ const PVB_OTPGenerationUI = () => {
     }, []);
 
     const handleGenerateOTP = async () => {
-        const generatedOTP = await generateOTP();
+        setOtpErrorMessage('');
+        const generatedOTP = await generateOTP(nic, setNicErrorMessage, setOtpErrorMessage);
         setOtp(generatedOTP);
+    };
+
+    const handleNICChange = (e) => {
+        const inputVal = e.target.value;
+        setNic(inputVal);
+        setNicErrorMessage('');
+        setOtpErrorMessage('');
     };
 
     return (
@@ -36,6 +47,18 @@ const PVB_OTPGenerationUI = () => {
             <div className="container">
                 <h2>
                     <p>
+                        NIC අංකය ඇතුලත් කරන්න <br />
+                        Input NIC Number <br />
+                        NIC எண்ணை உள்ளிடவும்<br />
+                    </p>
+                </h2>
+                <div className="nic_input_field">
+                    <input type="text" value={nic} onChange={handleNICChange} />
+                    {nicErrorMessage && <div className="error-message">{nicErrorMessage}</div>}
+                </div>
+
+                <h2>
+                    <p>
                         OTP අංකයක් නිපදවන්න <br />
                         Generate OTP Number <br />
                         OTP எண்ணை உருவாக்கவும்<br />
@@ -43,6 +66,9 @@ const PVB_OTPGenerationUI = () => {
                 </h2>
                 <div className="centered">
                     <label>{otp}</label>
+                    <div>
+                        {otpErrorMessage && <div className="error-message">{otpErrorMessage}</div>}
+                    </div>
                     <div name="otp-generate" className='otp_label_field'>
                         <button onClick={handleGenerateOTP} className='otp_generate_button'>
                             නිපදවන්න<br />
