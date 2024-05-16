@@ -7,24 +7,37 @@ const Dashboard = () => {
   const [electionDetails, setElectionDetails] = useState([]);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [data, setData] = useState([]);
+  const [totalVotes, setTotalVotes] = useState(0);
 
-  const fetchData = async () => {
+  const fetchPartyVotesData = async () => {
     const data = await FetchElectionDetails();
     setElectionDetails(data);
     const result = await axios('http://localhost:4000/pvb-api/votes-per-party');
     setData(result.data);
   };
 
-  useEffect(() => {
-    fetchData();
-    const voteRefreshIntervalId = setInterval(fetchData, 5000);
+  const fetchTotalVotesData = async () => {
+    const result = await axios('http://localhost:4000/pvb-api/total-votes');
+    return result.data.totalVotes;
+  };
 
+  const fetchData = async () => {
+    const totalVotesData = await fetchTotalVotesData();
+    setTotalVotes(totalVotesData);
+  };
+
+  useEffect(() => {
+    fetchPartyVotesData();
+    fetchData();
+    const voteRefreshIntervalId = setInterval(fetchPartyVotesData, 30000);
+    const totalVoteRefreshIntervalId = setInterval(fetchData, 30000);
     const dateTimeIntervalId = setInterval(() => {
       setCurrentDateTime(new Date());
     }, 1000);
     return () => {
       clearInterval(voteRefreshIntervalId);
       clearInterval(dateTimeIntervalId);
+      clearInterval(totalVoteRefreshIntervalId);
     };
   }, []);
 
@@ -62,6 +75,9 @@ const Dashboard = () => {
     </div>
     <div className="vote_chart" style={{ width: '700px', height: '500px' }}>
       <Bar data={chartData} />
+      <h2>
+        මුළු වලංගු චන්ද | Total Valid Votes | மொத்த செல்லுபடியாகும் வாக்குகள் : {totalVotes}
+      </h2>
     </div>
   </div>
   );

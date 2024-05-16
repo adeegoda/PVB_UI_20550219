@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import _ from 'lodash';
+import _, { set } from 'lodash';
 import 'semantic-ui-css/semantic.min.css';
 import { CardGroup } from 'semantic-ui-react';
 import '../Resources/eballotPage.css'
@@ -12,6 +12,7 @@ import VoteAtteptExceedModal from '../Modals/VoteAtteptExceedModal';
 import { SubmitConfirmedVote } from '../APIOperators/BallotSubmitAPI';
 import { FetchPartyCards } from '../APIOperators/PartyCardsAPI';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
+import { SubmitCancelledVote } from '../APIOperators/BallotSubmitAPI';
 
 const PVB_EBallotUI = () => {
     const [loading, setLoading] = useState(true);
@@ -39,6 +40,7 @@ const PVB_EBallotUI = () => {
     }, []); // Empty dependency array ensures useEffect runs only once on mount
 
     const [selectedPartyCode, setSelectedPartyCode] = useState('');
+    const [voteCancelled, setVoteCancelled] = useState(true);
     const [voted, setVotedFlag] = useState(false);
     const [attepmted, setAttempt] = useState(false);
     const [openConfirmation, setOpenConfirmation] = useState(false);
@@ -111,6 +113,7 @@ const PVB_EBallotUI = () => {
                 onCancel={() => {
                     CancelVote();
                     setAttempt(true);
+                    SubmitCancelledVote(voteCancelled);
                     if (!attepmted) {
                         setOpenConfirmation(false);
                         setOpenVotingFailed(true);
@@ -124,7 +127,6 @@ const PVB_EBallotUI = () => {
                 setOpenFinishVoting={setOpenFinishVoting}
                 selectedOption={selectedPartyCode}
             />
-
             <FinishVotingModal
                 open={openFinishVoting}
                 onClose={() => { setOpenFinishVoting(false); setVotingCompleted(true); }}
