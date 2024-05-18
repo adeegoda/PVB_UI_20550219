@@ -1,42 +1,43 @@
 .generalStyle {
-    padding: 20px 0;
     display: flex;
-    align-items: center;
     flex-direction: column;
     width: 100%;
-  }
-
-.voteCounts {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.voteCounts h2 {
-    text-align: left;
-    margin: 20px 0;
+    height: 100%;
+    justify-content: space-between;
 }
 
 .voteCountsDetails {
-    padding: 20px 0;
+    padding: 15px;
+    width: 50%;
+    text-align: center;
     display: flex;
-    justify-content: space-between
 }
 
-.chartContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    max-width: 1000px;
+.voteCountLabel {
+    padding: 15px;
     width: 100%;
-    max-height: 500px;
-    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chartContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50%;
 }
 
 .voteChart {
-    max-width: 700px;
+    max-width: 600px;
     width: 100%;
-    max-height: 500px;
+    max-height: 300px; 
     height: 100%;
-    margin: 10px 0;
+    margin: 10px;
+}
+
+.voteCounts {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

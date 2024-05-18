@@ -87,20 +87,20 @@ const Dashboard = () => {
     return <p style={{ color: 'red', fontSize: '20px' }}>Loading chart data...</p>;
   }
 
-  return (<div className='generalStyle'>
-    <div className="centered">
-      <h1>
-        {electionDetails.map(election => (
-          <React.Fragment key={election._id}>
-            {election.election_name_sinhala} | {election.election_name_english} | {election.election_name_tamil} - {election.election_year}
-          </React.Fragment>
-        ))}
-      </h1>
-      <h2>
-        {currentDateTime.toLocaleString()}
-      </h2>
-    </div>
+  return (
     <div className='generalStyle'>
+      <div className="centered">
+        <h1>
+          {electionDetails.map(election => (
+            <React.Fragment key={election._id}>
+              {election.election_name_sinhala} | {election.election_name_english} | {election.election_name_tamil} - {election.election_year}
+            </React.Fragment>
+          ))}
+        </h1>
+        <h2>
+          {currentDateTime.toLocaleString()}
+        </h2>
+      </div>
       <div className="chartContainer">
         <div className="voteChart" >
           <Bar data={chartData} />
@@ -109,29 +109,39 @@ const Dashboard = () => {
           <Pie data={pieData} />
         </div>
       </div>
+      <div className='voteCounts'>
+        <h3>
+          <div className='voteCountLabel' id='_totalValidVotes'>
+            <p>
+              මුළු වලංගු චන්ද <br />
+              Total Valid Votes <br />
+              மொத்த செல்லுபடியாகும் வாக்குகள் <br />
+            </p>
+            <label className='voteCountsDetails' style={{ color: 'green' }}>{totalValidVotes}</label>
+          </div>
+        </h3>
+        <h3>
+          <div className='voteCountLabel' id='_totalCancelledVotes'>
+            <p>
+              මුළු අවලංගු චන්ද <br />
+              Total Invalid Votes <br />
+              மொத்த செல்லுபடியாகும் வாக்குகள் <br />
+            </p>
+            <label className='voteCountsDetails' style={{ color: 'red' }}>{cancelledVotes}</label>
+          </div>
+        </h3>
+        <h3>
+          <div className='voteCountLabel' id='_totalVotes'>
+            <p>
+              මුළු චන්ද <br />
+              Total Votes <br />
+              மொத்த செல்லுபடியாகும் வாக்குகள் <br />
+            </p>
+            <label className='voteCountsDetails' style={{ color: 'blue' }}>{totalValidVotes + cancelledVotes}</label>
+          </div>
+        </h3>
+      </div>
     </div>
-
-    <div class='voteCounts'>
-      <h2>
-        <div className='voteCountsDetails'>
-          <div>මුළු වලංගු චන්ද | Total Valid Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
-          <div><label style={{ color: 'green' }}>{totalValidVotes}</label></div>
-        </div>
-      </h2>
-      <h2>
-        <div className='voteCountsDetails'>
-          <div>මුළු අවලංගු චන්ද | Total Invalid Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
-          <div><label style={{ color: 'red' }}>{cancelledVotes}</label></div>
-        </div>
-      </h2>
-      <h2>
-        <div className='voteCountsDetails'>
-          <div>මුළු චන්ද | Total Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
-          <div><label style={{ color: 'blue' }}>{totalValidVotes + cancelledVotes}</label></div>
-        </div>
-      </h2>
-    </div>
-  </div>
   );
 };
 
