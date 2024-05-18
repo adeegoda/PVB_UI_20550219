@@ -13,3 +13,17 @@ export const SubmitConfirmedVote = (selectedPartyCode) => {
             }
         );
 };
+
+export const SubmitCancelledVote = (status) => {
+    axios.post("http://localhost:4000/pvb-api/cancelled-ballots", {
+        voteCancelled: status
+    })
+        .then(
+            (response) => {
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+};

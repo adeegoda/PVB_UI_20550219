@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Header, ModalContent, ModalActions, Button, Icon } from 'semantic-ui-react';
 
-const ConfirmationModal = ({ open, onClose, onConfirm, onCancel, voted, setVotedFlag, setOpenFinishVoting , selectedOption }) => (
+const ConfirmationModal = ({ open, onClose, onConfirm, onCancel, voted, setVotedFlag, setOpenFinishVoting, selectedOption }) => (
     <Modal open={open} size='small'>
         <Header>චන්දය තහවුරු කිරීම | Confirming Vote | வாக்கை உறுதிப்படுத்துகிறது</Header>
         <ModalContent>

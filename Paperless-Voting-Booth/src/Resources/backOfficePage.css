@@ -1,0 +1,35 @@
+.backOfficeContainer {
+  text-align: center;
+  margin-top: 50px;
+  align-items: center;
+}
+
+.backOfficePages {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.backOfficeLinks {
+  padding: 10px;
+  text-align: center;
+}
+
+.backOfficeLinks:hover {
+  color: #f1f1f1;
+}
+
+.backOfficeButtons {
+  margin: 20px;
+  text-align: center;
+  color: white;
+  background-color: #3498DB;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.backOfficeLabels {
+  font-size: 30px;
+  color: white;
+}

@@ -1,5 +1,5 @@
 export const generateOTP = async (nic, setNicErrorMessage, setOtpErrorMessage) => {
-    if (nic != '') {
+    if (nic !== '') {
         if (!/^[0-9]{9}V$/.test(nic)) {
             setNicErrorMessage('වලංගු නොවන NIC ආකෘතියකි | Invalid NIC format | தவறான NIC வடிவம்');
             return;
