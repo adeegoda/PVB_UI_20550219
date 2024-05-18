@@ -4,6 +4,7 @@ import { Bar } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 import '../Resources/dashboardPage.css';
+import { Divider } from 'semantic-ui-react';
 
 const Dashboard = () => {
   const [electionDetails, setElectionDetails] = useState([]);
@@ -110,6 +111,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div className='voteCounts'>
+        <Divider />
         <h3>
           <div className='voteCountLabel' id='_totalValidVotes'>
             <p>
