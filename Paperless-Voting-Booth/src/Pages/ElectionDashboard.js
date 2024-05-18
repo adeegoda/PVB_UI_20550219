@@ -12,6 +12,12 @@ const Dashboard = () => {
   const [data, setData] = useState([]);
   const [totalValidVotes, setTotalValidVotes] = useState(0);
   const [cancelledVotes, setCancelledVotes] = useState(0);
+  const [partyDetails, setPartyDetails] = useState([]);
+
+  const fetchPartyDetails = async () => {
+    const result = await axios('http://localhost:4000/pvb-api/party-cards');
+    setPartyDetails(result.data);
+  };
 
   const fetchPartyVotesData = async () => {
     const data = await FetchElectionDetails();
@@ -40,6 +46,7 @@ const Dashboard = () => {
   useEffect(() => {
     fetchPartyVotesData();
     fetchVotesData();
+    fetchPartyDetails();
     const voteRefreshIntervalId = setInterval(fetchPartyVotesData, 30000);
     const totalVoteRefreshIntervalId = setInterval(fetchVotesData, 30000);
     const dateTimeIntervalId = setInterval(() => {
@@ -52,14 +59,19 @@ const Dashboard = () => {
     };
   }, []);
 
+  const getColorByPartyCode = (partyCode) => {
+    const party = partyDetails.find(p => p.party_code === partyCode);
+    return party ? party.party_color : '#000000';  // Default color if party not found
+  };
+
   const chartData = {
     labels: data.map(item => item._id),
     datasets: [
       {
         label: 'Votes Per Party',
         data: data.map(item => item.count),
-        backgroundColor: 'rgba(75,192,192,0.6)',
-        borderColor: 'rgba(75,192,192,1)',
+        backgroundColor: data.map(item => getColorByPartyCode(item._id)),
+        borderColor: data.map(item => getColorByPartyCode(item._id)),
         borderWidth: 1,
         hoverBackgroundColor: 'rgba(75,192,192,0.4)',
         hoverBorderColor: 'rgba(75,192,192,1)'
@@ -72,14 +84,7 @@ const Dashboard = () => {
     datasets: [
       {
         data: data.map(item => item.count),
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)'
-        ]
+        backgroundColor: data.map(item => getColorByPartyCode(item._id)),
       }
     ]
   };
