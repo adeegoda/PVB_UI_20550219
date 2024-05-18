@@ -8,7 +8,8 @@ const Dashboard = () => {
   const [electionDetails, setElectionDetails] = useState([]);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [data, setData] = useState([]);
-  const [totalVotes, setTotalVotes] = useState(0);
+  const [totalValidVotes, setTotalValidVotes] = useState(0);
+  const [cancelledVotes, setCancelledVotes] = useState(0);
 
   const fetchPartyVotesData = async () => {
     const data = await FetchElectionDetails();
@@ -17,21 +18,28 @@ const Dashboard = () => {
     setData(result.data);
   };
 
-  const fetchTotalVotesData = async () => {
-    const result = await axios('http://localhost:4000/pvb-api/total-votes');
-    return result.data.totalVotes;
+  const fetchTotalValidVotesData = async () => {
+    const result = await axios('http://localhost:4000/pvb-api/total-valid-votes');
+    return result.data.totalValidVotes;
   };
 
-  const fetchData = async () => {
-    const totalVotesData = await fetchTotalVotesData();
-    setTotalVotes(totalVotesData);
+  const fetchCancelledVotesData = async () => {
+    const result = await axios('http://localhost:4000/pvb-api/total-cancelled-votes');
+    return result.data.totalCancelledVotes;
+  };
+
+  const fetchVotesData = async () => {
+    const totalValidVotesData = await fetchTotalValidVotesData();
+    setTotalValidVotes(totalValidVotesData);
+    const totalCanceledVotesData = await fetchCancelledVotesData();
+    setCancelledVotes(totalCanceledVotesData);
   };
 
   useEffect(() => {
     fetchPartyVotesData();
-    fetchData();
+    fetchVotesData();
     const voteRefreshIntervalId = setInterval(fetchPartyVotesData, 30000);
-    const totalVoteRefreshIntervalId = setInterval(fetchData, 30000);
+    const totalVoteRefreshIntervalId = setInterval(fetchVotesData, 30000);
     const dateTimeIntervalId = setInterval(() => {
       setCurrentDateTime(new Date());
     }, 1000);
@@ -46,7 +54,7 @@ const Dashboard = () => {
     labels: data.map(item => item._id),
     datasets: [
       {
-        label: 'Votes per party',
+        label: 'Votes Per Party',
         data: data.map(item => item.count),
         backgroundColor: 'rgba(75,192,192,0.6)',
         borderColor: 'rgba(75,192,192,1)',
@@ -81,7 +89,7 @@ const Dashboard = () => {
       <h2>
         <div className='voteCountsDetails'>
           <div>මුළු වලංගු චන්ද | Total Valid Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
-          <div><label style={{ color: 'green' }}>{totalVotes}</label></div>
+          <div><label style={{ color: 'green' }}>{totalValidVotes}</label></div>
         </div>
       </h2>
     </div>
@@ -89,7 +97,7 @@ const Dashboard = () => {
       <h2>
         <div className='voteCountsDetails'>
           <div>මුළු අවලංගු චන්ද | Total Invalid Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
-          <div><label style={{ color: 'red' }}>{totalVotes}</label></div>
+          <div><label style={{ color: 'red' }}>{cancelledVotes}</label></div>
         </div>
       </h2>
     </div>
@@ -97,7 +105,7 @@ const Dashboard = () => {
       <h2>
         <div className='voteCountsDetails'>
           <div>මුළු චන්ද | Total Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
-          <div><label style={{ color: 'blue' }}>{totalVotes}</label></div>
+          <div><label style={{ color: 'blue' }}>{totalValidVotes + cancelledVotes}</label></div>
         </div>
       </h2>
     </div>
