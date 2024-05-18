@@ -61,7 +61,7 @@ const Dashboard = () => {
 
   const getColorByPartyCode = (partyCode) => {
     const party = partyDetails.find(p => p.party_code === partyCode);
-    return party ? party.party_color : '#000000';  // Default color if party not found
+    return party ? party.party_color : '#000000';
   };
 
   const chartData = {
@@ -73,11 +73,13 @@ const Dashboard = () => {
         backgroundColor: data.map(item => getColorByPartyCode(item._id)),
         borderColor: data.map(item => getColorByPartyCode(item._id)),
         borderWidth: 1,
-        hoverBackgroundColor: 'rgba(75,192,192,0.4)',
-        hoverBorderColor: 'rgba(75,192,192,1)'
+        hoverBackgroundColor: data.map(item => getColorByPartyCode(item._id)),
+        hoverBorderColor: '#313338'
       }
     ]
   };
+
+  const totalVotes = data.reduce((total, item) => total + item.count, 0);
 
   const pieData = {
     labels: data.map(item => item._id),
@@ -85,6 +87,7 @@ const Dashboard = () => {
       {
         data: data.map(item => item.count),
         backgroundColor: data.map(item => getColorByPartyCode(item._id)),
+        hoverBorderColor: '#313338'
       }
     ]
   };
@@ -112,7 +115,21 @@ const Dashboard = () => {
           <Bar data={chartData} />
         </div>
         <div className="voteChart" >
-          <Pie data={pieData} />
+          <Pie
+            data={pieData}
+            options={{
+              tooltips: {
+                callbacks: {
+                  label: function (tooltipItem, data) {
+                    const party = data.labels[tooltipItem.index];
+                    const voteCount = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    const percentage = ((voteCount / totalVotes) * 100).toFixed(2);
+                    return `${party}: ${percentage}%`;
+                  }
+                }
+              }
+            }}
+          />
         </div>
       </div>
       <div className='voteCounts'>
