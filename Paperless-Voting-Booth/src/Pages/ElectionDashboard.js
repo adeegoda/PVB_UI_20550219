@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 import '../Resources/dashboardPage.css';
 
@@ -65,6 +66,23 @@ const Dashboard = () => {
     ]
   };
 
+  const pieData = {
+    labels: data.map(item => item._id),
+    datasets: [
+      {
+        data: data.map(item => item.count),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)'
+        ]
+      }
+    ]
+  };
+
   if (!chartData) {
     return <p style={{ color: 'red', fontSize: '20px' }}>Loading chart data...</p>;
   }
@@ -82,9 +100,17 @@ const Dashboard = () => {
         {currentDateTime.toLocaleString()}
       </h2>
     </div>
-    <div className="voteChart">
-      <Bar data={chartData} />
+    <div className='generalStyle'>
+      <div className="chartContainer">
+        <div className="voteChart" >
+          <Bar data={chartData} />
+        </div>
+        <div className="voteChart" >
+          <Pie data={pieData} />
+        </div>
+      </div>
     </div>
+
     <div class='voteCounts'>
       <h2>
         <div className='voteCountsDetails'>
@@ -92,16 +118,12 @@ const Dashboard = () => {
           <div><label style={{ color: 'green' }}>{totalValidVotes}</label></div>
         </div>
       </h2>
-    </div>
-    <div class='voteCounts'>
       <h2>
         <div className='voteCountsDetails'>
           <div>මුළු අවලංගු චන්ද | Total Invalid Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
           <div><label style={{ color: 'red' }}>{cancelledVotes}</label></div>
         </div>
       </h2>
-    </div>
-    <div class='voteCounts'>
       <h2>
         <div className='voteCountsDetails'>
           <div>මුළු චන්ද | Total Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>

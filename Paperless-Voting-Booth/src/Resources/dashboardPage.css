@@ -1,3 +1,11 @@
+.generalStyle {
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+
 .voteCounts {
     width: 100%;
     max-width: 700px;
@@ -10,8 +18,19 @@
 }
 
 .voteCountsDetails {
+    padding: 20px 0;
     display: flex;
     justify-content: space-between
+}
+
+.chartContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+    max-height: 500px;
+    height: 100%;
 }
 
 .voteChart {
@@ -19,12 +38,5 @@
     width: 100%;
     max-height: 500px;
     height: 100%;
-    margin: 20px 0;
-}
-
-.generalStyle {
-    padding: 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin: 10px 0;
 }
