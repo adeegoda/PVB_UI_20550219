@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
+import '../Resources/dashboardPage.css';
 
 const Dashboard = () => {
   const [electionDetails, setElectionDetails] = useState([]);
@@ -60,7 +61,7 @@ const Dashboard = () => {
     return <p style={{ color: 'red', fontSize: '20px' }}>Loading chart data...</p>;
   }
 
-  return (<div style={{ padding: '20px 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+  return (<div className='generalStyle'>
     <div className="centered">
       <h1>
         {electionDetails.map(election => (
@@ -73,28 +74,28 @@ const Dashboard = () => {
         {currentDateTime.toLocaleString()}
       </h2>
     </div>
-    <div className="vote_chart" style={{ maxWidth: '700px', width: '100%', maxHeight: '500px', height: '100%', margin: '20px 0' }}>
+    <div className="voteChart">
       <Bar data={chartData} />
     </div>
-    <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto' }}>
-      <h2 style={{ margin: '20px 0' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div class='voteCounts'>
+      <h2>
+        <div className='voteCountsDetails'>
           <div>මුළු වලංගු චන්ද | Total Valid Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
           <div><label style={{ color: 'green' }}>{totalVotes}</label></div>
         </div>
       </h2>
     </div>
-    <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto' }}>
-      <h2 style={{ margin: '20px 0' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div class='voteCounts'>
+      <h2>
+        <div className='voteCountsDetails'>
           <div>මුළු අවලංගු චන්ද | Total Invalid Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
           <div><label style={{ color: 'red' }}>{totalVotes}</label></div>
         </div>
       </h2>
     </div>
-    <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto' }}>
-      <h2 style={{ margin: '20px 0' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div class='voteCounts'>
+      <h2>
+        <div className='voteCountsDetails'>
           <div>මුළු චන්ද | Total Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
           <div><label style={{ color: 'blue' }}>{totalVotes}</label></div>
         </div>
