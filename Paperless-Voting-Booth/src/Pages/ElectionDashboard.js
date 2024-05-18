@@ -132,7 +132,7 @@ const Dashboard = () => {
             <p>
               මුළු අවලංගු චන්ද <br />
               Total Invalid Votes <br />
-              மொத்த செல்லுபடியாகும் வாக்குகள் <br />
+              மொத்த செல்லாத வாக்குகள் <br />
             </p>
             <label className='voteCountsDetails' style={{ color: 'red' }}>{cancelledVotes}</label>
           </div>
@@ -140,9 +140,9 @@ const Dashboard = () => {
         <h3>
           <div className='voteCountLabel' id='_totalVotes'>
             <p>
-              මුළු චන්ද <br />
-              Total Votes <br />
-              மொத்த செல்லுபடியாகும் வாக்குகள் <br />
+              මුළු ප්‍රකාශිත චන්ද <br />
+              Total Casted Votes <br />
+              போடப்பட்ட மொத்த வாக்குகள் <br />
             </p>
             <label className='voteCountsDetails' style={{ color: 'blue' }}>{totalValidVotes + cancelledVotes}</label>
           </div>
