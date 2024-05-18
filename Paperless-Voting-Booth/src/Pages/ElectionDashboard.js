@@ -60,7 +60,7 @@ const Dashboard = () => {
     return <p style={{ color: 'red', fontSize: '20px' }}>Loading chart data...</p>;
   }
 
-  return (<div>
+  return (<div style={{ padding: '20px 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
     <div className="centered">
       <h1>
         {electionDetails.map(election => (
@@ -73,10 +73,31 @@ const Dashboard = () => {
         {currentDateTime.toLocaleString()}
       </h2>
     </div>
-    <div className="vote_chart" style={{ width: '700px', height: '500px' }}>
+    <div className="vote_chart" style={{ maxWidth: '700px', width: '100%', maxHeight: '500px', height: '100%', margin: '20px 0' }}>
       <Bar data={chartData} />
-      <h2>
-        මුළු වලංගු චන්ද | Total Valid Votes | மொத்த செல்லுபடியாகும் வாக்குகள் : {totalVotes}
+    </div>
+    <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto' }}>
+      <h2 style={{ margin: '20px 0' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div>මුළු වලංගු චන්ද | Total Valid Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
+          <div><label style={{ color: 'green' }}>{totalVotes}</label></div>
+        </div>
+      </h2>
+    </div>
+    <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto' }}>
+      <h2 style={{ margin: '20px 0' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div>මුළු අවලංගු චන්ද | Total Invalid Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
+          <div><label style={{ color: 'red' }}>{totalVotes}</label></div>
+        </div>
+      </h2>
+    </div>
+    <div style={{ width: '100%', maxWidth: '700px', margin: '0 auto' }}>
+      <h2 style={{ margin: '20px 0' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div>මුළු චන්ද | Total Votes | மொத்த செல்லுபடியாகும் வாக்குகள்</div>
+          <div><label style={{ color: 'blue' }}>{totalVotes}</label></div>
+        </div>
       </h2>
     </div>
   </div>
