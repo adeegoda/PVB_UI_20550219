@@ -26,7 +26,7 @@ const PVB_CoverUI = () => {
                 </h1>
             </div>
             <h1>
-                <Link to='/otpVerificationUI' className="coverPage">
+                <Link to='/verifyOTP' className="coverPage">
                     <p>
                         චන්ද ප්‍රකාශය ආරම්භ කරන්න<br />
                         Start Casting Vote<br />

@@ -67,7 +67,7 @@ const PVB_EBallotUI = () => {
 
     useEffect(() => {
         if (votingCompleted) {
-            history.replace('/coverUI');
+            history.replace('/');
         }
     }, [votingCompleted, history]);
 

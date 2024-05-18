@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import CoverUI from './Pages/Cover';
+import BackOfficeUI from './Pages/BackOffice';
 import EBallotUI from './Pages/EBallot';
 import VerifyOTP from './Pages/VerifyOTP';
 import GenerateOTP from './Pages/GenerateOTP';
@@ -17,7 +18,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         isAuthenticated ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: '/coverUI', state: { from: props.location } }} />
+          <Redirect to={{ pathname: '/', state: { from: props.location } }} />
         )
       }
     />
@@ -30,10 +31,10 @@ const PVB_MainUI = () => {
       <div>
         <Switch>
           <Route exact path="/" component={CoverUI} />
-          <Route path="/generateOTP" component={GenerateOTP} />
-          <Route path="/coverUI" component={CoverUI} />
-          <Route path="/otpVerificationUI" component={VerifyOTP} />
-          <Route path="/dashboard" component={DasboardUI} />
+          <Route path="/backOffice" component={BackOfficeUI} />
+          <Route path="/verifyOTP" component={VerifyOTP} />
+          <PrivateRoute path="/generateOTP" component={GenerateOTP} />
+          <PrivateRoute path="/dashboard" component={DasboardUI} />
           <PrivateRoute path="/votingUI" component={EBallotUI} />
         </Switch>
       </div>
