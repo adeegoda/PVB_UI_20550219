@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [totalValidVotes, setTotalValidVotes] = useState(0);
   const [cancelledVotes, setCancelledVotes] = useState(0);
   const [partyDetails, setPartyDetails] = useState([]);
+  const [barChartDataUpdated, setBarChartDataUpdated] = useState(false);
 
   const fetchPartyDetails = async () => {
     const result = await axios('http://localhost:4000/pvb-api/party-cards');
@@ -24,6 +25,8 @@ const Dashboard = () => {
     setElectionDetails(data);
     const result = await axios('http://localhost:4000/pvb-api/votes-per-party');
     setData(result.data);
+    setBarChartDataUpdated(true);
+    setTimeout(() => setBarChartDataUpdated(false), 200);
   };
 
   const fetchTotalValidVotesData = async () => {
@@ -129,6 +132,7 @@ const Dashboard = () => {
                 }
               }
             }}
+            key={barChartDataUpdated}
           />
         </div>
       </div>
@@ -141,7 +145,7 @@ const Dashboard = () => {
               Total Valid Votes <br />
               மொத்த செல்லுபடியாகும் வாக்குகள் <br />
             </p>
-            <label className='voteCountsDetails' style={{ color: 'green' }}>{totalValidVotes}</label>
+            <label className='voteCountsDetails' style={{ color: '#82E0AA' }}>{totalValidVotes}</label>
           </div>
         </h3>
         <h3>
@@ -151,7 +155,7 @@ const Dashboard = () => {
               Total Invalid Votes <br />
               மொத்த செல்லாத வாக்குகள் <br />
             </p>
-            <label className='voteCountsDetails' style={{ color: 'red' }}>{cancelledVotes}</label>
+            <label className='voteCountsDetails' style={{ color: '#EC7063' }}>{cancelledVotes}</label>
           </div>
         </h3>
         <h3>
@@ -161,7 +165,7 @@ const Dashboard = () => {
               Total Casted Votes <br />
               போடப்பட்ட மொத்த வாக்குகள் <br />
             </p>
-            <label className='voteCountsDetails' style={{ color: 'blue' }}>{totalValidVotes + cancelledVotes}</label>
+            <label className='voteCountsDetails' style={{ color: '#85C1E9' }}>{totalValidVotes + cancelledVotes}</label>
           </div>
         </h3>
       </div>
