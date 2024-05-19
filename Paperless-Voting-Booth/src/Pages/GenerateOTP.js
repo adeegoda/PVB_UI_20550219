@@ -45,14 +45,14 @@ const PVB_OTPGenerationUI = () => {
                     ))}
                 </h1>
                 <div>
-                <button className='backButton' name='backButton'>
-                    <Link className='backButtonLinks' to='/backOffice'>
-                        <p className='backButtonLabels'>
-                            පෙර පිටුවට |  To Previous Page | முந்தைய பக்கத்திற்கு
-                        </p>
-                    </Link>
-                </button>
-            </div>
+                    <button className='backButton' name='backButton'>
+                        <Link className='backButtonLinks' to='/backOffice'>
+                            <p className='backButtonLabels'>
+                                ආපසු | Back | மீண்டும்
+                            </p>
+                        </Link>
+                    </button>
+                </div>
             </div>
             <div className="container">
                 <h2>

@@ -111,16 +111,21 @@ const Dashboard = () => {
           ))}
         </h1>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <label className='timeDetails'>
+            {currentDateTime.toLocaleString()}
+          </label>
+          <button className='backButton' name='backButton'>
+            <Link className='backButtonLinks' to='/backOffice'>
+              <p className='backButtonLabels'>
+                ආපසු | Back | மீண்டும்
+              </p>
+            </Link>
+          </button>
           <div>
-            <label className='timeDetails'>
-              {currentDateTime.toLocaleString()}
-            </label>
-          </div>
-          <div>
-            <button className='backButton' name='backButton'>
-              <Link className='backButtonLinks' to='/backOffice'>
+            <button className='backButton' name='goTOPartyDetails'>
+              <Link className='backButtonLinks' to='/partyDetails'>
                 <p className='backButtonLabels'>
-                  පෙර පිටුවට |  To Previous Page | முந்தைய பக்கத்திற்கு
+                  පක්ෂ විස්තර | Party Details | கட்சி விவரங்கள்
                 </p>
               </Link>
             </button>
