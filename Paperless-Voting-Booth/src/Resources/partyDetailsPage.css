@@ -38,3 +38,9 @@
 .containerHeader {
     margin-top: 50px;
 }
+
+.party-logo {
+    width: 75px;
+    height: 75px;
+    object-fit: fill;
+}

@@ -31,8 +31,7 @@ const PartyDetailsPage = () => {
     return (
         <div className="page-container">
             <div>
-                <div className="centered" style={{ marginTop: '200px' }}>
-                    <Divider horizontal></Divider>
+                <div className="centered" style={{ marginTop: '50px' }}>
                     <h1>
                         {electionDetails.map(election => (
                             <React.Fragment key={election._id}>
@@ -75,11 +74,11 @@ const PartyDetailsPage = () => {
                             {partyDetails.map((party, index) => (
                                 <tr key={index}>
                                     <td>{party.party_code}</td>
-                                    <td><img src={party.avatar} alt={party.party_code} /></td>
+                                    <td><img className="party-logo" src={party.avatar} alt={party.party_code} /></td>
                                     <td>{party.header1}</td>
                                     <td>{party.header2}</td>
                                     <td>{party.header3}</td>
-                                    <td style={{ backgroundColor: party.party_color }}>{party.party_color}</td>
+                                    <td style={{ backgroundColor: party.party_color }}></td>
                                 </tr>
                             ))}
                         </tbody>
