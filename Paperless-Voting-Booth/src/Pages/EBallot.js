@@ -119,13 +119,13 @@ const PVB_EBallotUI = () => {
                 onCancel={() => {
                     CancelVote();
                     setAttemptCount(prevCount => prevCount + 1);
-                    SubmitCancelledVote(voteCancelled);
                     if (attemptCount < 2) {
                         setOpenConfirmation(false);
                     } else {
                         setVotedFlag(false);
                         setOpenConfirmation(false);
                         setOpenVotingFailed(true);
+                        SubmitCancelledVote(voteCancelled);
                     }
                 }}
                 voted={voted}
