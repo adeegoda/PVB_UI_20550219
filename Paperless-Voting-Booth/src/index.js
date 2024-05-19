@@ -6,7 +6,7 @@ import BackOfficeUI from './Pages/BackOffice';
 import EBallotUI from './Pages/EBallot';
 import VerifyOTP from './Pages/VerifyOTP';
 import GenerateOTP from './Pages/GenerateOTP';
-import DasboardUI from './Pages/ElectionDashboard';
+import DashboardUI from './Pages/ElectionDashboard';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = true;
@@ -34,7 +34,7 @@ const PVB_MainUI = () => {
           <Route path="/backOffice" component={BackOfficeUI} />
           <Route path="/verifyOTP" component={VerifyOTP} />
           <PrivateRoute path="/generateOTP" component={GenerateOTP} />
-          <PrivateRoute path="/dashboard" component={DasboardUI} />
+          <PrivateRoute path="/dashboard" component={DashboardUI} />
           <PrivateRoute path="/votingUI" component={EBallotUI} />
         </Switch>
       </div>

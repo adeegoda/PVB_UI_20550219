@@ -40,6 +40,9 @@ const PVB_EBallotUI = () => {
     }, []); // Empty dependency array ensures useEffect runs only once on mount
 
     const [selectedPartyCode, setSelectedPartyCode] = useState('');
+    const [selectedPartyNameSinhala, setSelectedPartyNameSinhala] = useState('');
+    const [selectedPartyNameEnglish, setSelectedPartyNameEnglish] = useState('');
+    const [selectedPartyNameTamil, setSelectedPartyNameTamil] = useState('');
     const [voteCancelled, setVoteCancelled] = useState(true);
     const [voted, setVotedFlag] = useState(false);
     const [attepmted, setAttempt] = useState(false);
@@ -60,6 +63,9 @@ const PVB_EBallotUI = () => {
     const SelectionVote = (card) => {
         try {
             setSelectedPartyCode(card.party_code);
+            setSelectedPartyNameSinhala(card.header1);
+            setSelectedPartyNameEnglish(card.header2);
+            setSelectedPartyNameTamil(card.header3);
         } catch (error) {
             InvalidOperationMessage();
         }
@@ -125,7 +131,9 @@ const PVB_EBallotUI = () => {
                 voted={voted}
                 setVotedFlag={setVotedFlag}
                 setOpenFinishVoting={setOpenFinishVoting}
-                selectedOption={selectedPartyCode}
+                selectedPartyNameSinhala={selectedPartyNameSinhala}
+                selectedPartyNameEnglish={selectedPartyNameEnglish}
+                selectedPartyNameTamil={selectedPartyNameTamil}
             />
             <FinishVotingModal
                 open={openFinishVoting}
