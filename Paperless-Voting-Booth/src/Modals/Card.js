@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card as SemanticCard, Image, Placeholder, Header, Button, Divider } from 'semantic-ui-react';
+import '../Resources/card.css';
 
 const Card = ({ loading, card, voted, onVote, setVotedFlag, setOpenConfirmation, selectedCard, setSelectedCard }) => (
-    <SemanticCard style={card.party_code === selectedCard ? { backgroundColor: '#DCFA00' } : {}}>
+    <SemanticCard className={card.party_code === selectedCard ? 'blink' : ''}>
         {loading ? (
             <Placeholder>
                 <Placeholder.Image square />
