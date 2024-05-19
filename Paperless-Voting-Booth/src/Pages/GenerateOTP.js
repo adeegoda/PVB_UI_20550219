@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../Resources/otpGenerationPage.css';
+import { Link } from 'react-router-dom';
 import { generateOTP } from '../APIOperators/OTPGenerationAPI';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 
@@ -43,6 +44,15 @@ const PVB_OTPGenerationUI = () => {
                         </React.Fragment>
                     ))}
                 </h1>
+                <div>
+                    <button className='backButton' name='backButton'>
+                        <Link className='backButtonLinks' to='/backOffice'>
+                            <p className='backButtonLabels'>
+                                ආපසු | Back | மீண்டும்
+                            </p>
+                        </Link>
+                    </button>
+                </div>
             </div>
             <div className="container">
                 <h2>

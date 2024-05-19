@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Bar } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
@@ -109,9 +110,27 @@ const Dashboard = () => {
             </React.Fragment>
           ))}
         </h1>
-        <h2>
-          {currentDateTime.toLocaleString()}
-        </h2>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <label className='timeDetails'>
+            {currentDateTime.toLocaleString()}
+          </label>
+          <button className='backButton' name='backButton'>
+            <Link className='backButtonLinks' to='/backOffice'>
+              <p className='backButtonLabels'>
+                ආපසු | Back | மீண்டும்
+              </p>
+            </Link>
+          </button>
+          <div>
+            <button className='backButton' name='goTOPartyDetails'>
+              <Link className='backButtonLinks' to='/partyDetails'>
+                <p className='backButtonLabels'>
+                  පක්ෂ විස්තර | Party Details | கட்சி விவரங்கள்
+                </p>
+              </Link>
+            </button>
+          </div>
+        </div>
       </div>
       <div className="chartContainer">
         <div className="voteChart" >
@@ -169,6 +188,7 @@ const Dashboard = () => {
           </div>
         </h3>
       </div>
+
     </div>
   );
 };
