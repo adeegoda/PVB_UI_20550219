@@ -1,0 +1,29 @@
+.page-container {
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 576px) {
+    .page-container {
+        max-width: 540px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .page-container {
+        max-width: 720px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .page-container {
+        max-width: 960px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .page-container {
+        max-width: 1140px;
+    }
+}
