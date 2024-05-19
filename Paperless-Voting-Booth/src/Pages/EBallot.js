@@ -50,6 +50,7 @@ const PVB_EBallotUI = () => {
     const [openVotingFailed, setOpenVotingFailed] = useState(false);
     const [votingCompleted, setVotingCompleted] = useState(false);
     const [attemptCount, setAttemptCount] = useState(0);
+    const [selectedCard, setSelectedCard] = useState(null);
     const history = useHistory();
 
     const CancelVote = () => {
@@ -103,6 +104,8 @@ const PVB_EBallotUI = () => {
                             setVotedFlag={setVotedFlag}
                             setOpenConfirmation={setOpenConfirmation}
                             setOpenFinishVoting={setOpenFinishVoting}
+                            selectedCard={selectedCard}
+                            setSelectedCard={setSelectedCard}
                         />
                     ))}
                 </CardGroup>
@@ -131,6 +134,7 @@ const PVB_EBallotUI = () => {
                 voted={voted}
                 setVotedFlag={setVotedFlag}
                 setOpenFinishVoting={setOpenFinishVoting}
+                setSelectedCard={setSelectedCard}
                 selectedPartyNameSinhala={selectedPartyNameSinhala}
                 selectedPartyNameEnglish={selectedPartyNameEnglish}
                 selectedPartyNameTamil={selectedPartyNameTamil}

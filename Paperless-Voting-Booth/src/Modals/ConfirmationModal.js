@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Header, ModalContent, ModalActions, Button, Icon } from 'semantic-ui-react';
 
-const ConfirmationModal = ({ open, onClose, onConfirm, onCancel, voted, setVotedFlag, setOpenFinishVoting, selectedPartyNameSinhala, selectedPartyNameEnglish, selectedPartyNameTamil }) => (
+const ConfirmationModal = ({ open, onClose, onConfirm, onCancel, voted, setVotedFlag, setOpenFinishVoting, selectedPartyNameSinhala, selectedPartyNameEnglish, selectedPartyNameTamil, setSelectedCard }) => (
     <Modal open={open} size='small'>
         <Header>චන්දය තහවුරු කිරීම | Confirming Vote | வாக்கை உறுதிப்படுத்துகிறது</Header>
         <ModalContent>
@@ -22,7 +22,7 @@ const ConfirmationModal = ({ open, onClose, onConfirm, onCancel, voted, setVoted
                 name='cancelVote'
                 disabled={!voted}
                 negative
-                onClick={() => [onCancel(), setVotedFlag(false), onClose()]}
+                onClick={() => [onCancel(), setVotedFlag(false), onClose(), setSelectedCard(null)]}
                 primary>
                 <Icon name='remove' />
                 නැත | No | இல்லை
