@@ -45,11 +45,11 @@ const PVB_EBallotUI = () => {
     const [selectedPartyNameTamil, setSelectedPartyNameTamil] = useState('');
     const [voteCancelled, setVoteCancelled] = useState(true);
     const [voted, setVotedFlag] = useState(false);
-    const [attepmted, setAttempt] = useState(false);
     const [openConfirmation, setOpenConfirmation] = useState(false);
     const [openFinishVoting, setOpenFinishVoting] = useState(false);
     const [openVotingFailed, setOpenVotingFailed] = useState(false);
     const [votingCompleted, setVotingCompleted] = useState(false);
+    const [attemptCount, setAttemptCount] = useState(0);
     const history = useHistory();
 
     const CancelVote = () => {
@@ -118,14 +118,14 @@ const PVB_EBallotUI = () => {
                 }}
                 onCancel={() => {
                     CancelVote();
-                    setAttempt(true);
+                    setAttemptCount(prevCount => prevCount + 1);
                     SubmitCancelledVote(voteCancelled);
-                    if (!attepmted) {
+                    if (attemptCount < 2) {
                         setOpenConfirmation(false);
-                        setOpenVotingFailed(true);
                     } else {
                         setVotedFlag(false);
                         setOpenConfirmation(false);
+                        setOpenVotingFailed(true);
                     }
                 }}
                 voted={voted}
