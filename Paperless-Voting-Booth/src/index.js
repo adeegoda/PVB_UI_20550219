@@ -31,8 +31,8 @@ const PVB_MainUI = () => {
       <div>
         <Switch>
           <Route exact path="/" component={CoverUI} />
-          <Route path="/backOffice" component={BackOfficeUI} />
-          <Route path="/verifyOTP" component={VerifyOTP} />
+          <PrivateRoute path="/backOffice" component={BackOfficeUI} />
+          <PrivateRoute path="/verifyOTP" component={VerifyOTP} />
           <PrivateRoute path="/generateOTP" component={GenerateOTP} />
           <PrivateRoute path="/dashboard" component={DashboardUI} />
           <PrivateRoute path="/votingUI" component={EBallotUI} />
