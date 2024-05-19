@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card as SemanticCard, Image, Placeholder, Header, Button, Divider } from 'semantic-ui-react';
+import '../Resources/card.css';
 
-const Card = ({ loading, card, voted, onVote, setVotedFlag, setOpenConfirmation }) => (
-    <SemanticCard>
+const Card = ({ loading, card, voted, onVote, setVotedFlag, setOpenConfirmation, selectedCard, setSelectedCard }) => (
+    <SemanticCard className={card.party_code === selectedCard ? 'blink' : ''}>
         {loading ? (
             <Placeholder>
                 <Placeholder.Image square />
@@ -37,6 +38,7 @@ const Card = ({ loading, card, voted, onVote, setVotedFlag, setOpenConfirmation 
                         onVote(card);
                         setVotedFlag(true);
                         setOpenConfirmation(true);
+                        setSelectedCard(card.party_code);
                     }}
                     primary>
                     චන්දය ප්‍රකාශ කරන්න | Cast Vote | ஓட்டு போடுங்கள்

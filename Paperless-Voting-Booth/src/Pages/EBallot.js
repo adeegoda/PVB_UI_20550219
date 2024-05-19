@@ -40,13 +40,17 @@ const PVB_EBallotUI = () => {
     }, []); // Empty dependency array ensures useEffect runs only once on mount
 
     const [selectedPartyCode, setSelectedPartyCode] = useState('');
+    const [selectedPartyNameSinhala, setSelectedPartyNameSinhala] = useState('');
+    const [selectedPartyNameEnglish, setSelectedPartyNameEnglish] = useState('');
+    const [selectedPartyNameTamil, setSelectedPartyNameTamil] = useState('');
     const [voteCancelled, setVoteCancelled] = useState(true);
     const [voted, setVotedFlag] = useState(false);
-    const [attepmted, setAttempt] = useState(false);
     const [openConfirmation, setOpenConfirmation] = useState(false);
     const [openFinishVoting, setOpenFinishVoting] = useState(false);
     const [openVotingFailed, setOpenVotingFailed] = useState(false);
     const [votingCompleted, setVotingCompleted] = useState(false);
+    const [attemptCount, setAttemptCount] = useState(0);
+    const [selectedCard, setSelectedCard] = useState(null);
     const history = useHistory();
 
     const CancelVote = () => {
@@ -60,6 +64,9 @@ const PVB_EBallotUI = () => {
     const SelectionVote = (card) => {
         try {
             setSelectedPartyCode(card.party_code);
+            setSelectedPartyNameSinhala(card.header1);
+            setSelectedPartyNameEnglish(card.header2);
+            setSelectedPartyNameTamil(card.header3);
         } catch (error) {
             InvalidOperationMessage();
         }
@@ -97,6 +104,8 @@ const PVB_EBallotUI = () => {
                             setVotedFlag={setVotedFlag}
                             setOpenConfirmation={setOpenConfirmation}
                             setOpenFinishVoting={setOpenFinishVoting}
+                            selectedCard={selectedCard}
+                            setSelectedCard={setSelectedCard}
                         />
                     ))}
                 </CardGroup>
@@ -112,20 +121,23 @@ const PVB_EBallotUI = () => {
                 }}
                 onCancel={() => {
                     CancelVote();
-                    setAttempt(true);
-                    SubmitCancelledVote(voteCancelled);
-                    if (!attepmted) {
+                    setAttemptCount(prevCount => prevCount + 1);
+                    if (attemptCount < 2) {
                         setOpenConfirmation(false);
-                        setOpenVotingFailed(true);
                     } else {
                         setVotedFlag(false);
                         setOpenConfirmation(false);
+                        setOpenVotingFailed(true);
+                        SubmitCancelledVote(voteCancelled);
                     }
                 }}
                 voted={voted}
                 setVotedFlag={setVotedFlag}
                 setOpenFinishVoting={setOpenFinishVoting}
-                selectedOption={selectedPartyCode}
+                setSelectedCard={setSelectedCard}
+                selectedPartyNameSinhala={selectedPartyNameSinhala}
+                selectedPartyNameEnglish={selectedPartyNameEnglish}
+                selectedPartyNameTamil={selectedPartyNameTamil}
             />
             <FinishVotingModal
                 open={openFinishVoting}
