@@ -31,7 +31,7 @@ const PartyDetailsPage = () => {
     return (
         <div className="page-container">
             <div>
-                <div className="centered" style={{ marginTop: '50px' }}>
+                <div className="centered" style={{ marginTop: '200px' }}>
                     <h1>
                         {electionDetails.map(election => (
                             <React.Fragment key={election._id}>
