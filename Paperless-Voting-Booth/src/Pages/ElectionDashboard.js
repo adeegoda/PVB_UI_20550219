@@ -129,6 +129,15 @@ const Dashboard = () => {
                 </p>
               </Link>
             </button>
+            <div>
+              <button className='backButton' name='backButton'>
+                <Link className='backButtonLinks' to='/OTPFraudUI'>
+                  <p className='backButtonLabels'>
+                    OTP අවභාවිත | OTP Frauds | OTP மோசடிகள்
+                  </p>
+                </Link>
+              </button>
+            </div>
           </div>
         </div>
       </div>

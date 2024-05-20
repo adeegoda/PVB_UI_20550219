@@ -8,6 +8,7 @@ import VerifyOTP from './Pages/VerifyOTP';
 import GenerateOTP from './Pages/GenerateOTP';
 import DashboardUI from './Pages/ElectionDashboard';
 import PartyDetailsUI from './Pages/PartyDetailsPage';
+import OTPFraudDetailsUI from './Pages/OTPFraudPage';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = true;
@@ -38,6 +39,7 @@ const PVB_MainUI = () => {
           <PrivateRoute path="/dashboard" component={DashboardUI} />
           <PrivateRoute path="/partyDetails" component={PartyDetailsUI} />
           <PrivateRoute path="/votingUI" component={EBallotUI} />
+          <PrivateRoute path="/OTPFraudUI" component={OTPFraudDetailsUI} />
         </Switch>
       </div>
     </Router>
