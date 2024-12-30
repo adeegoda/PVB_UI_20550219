@@ -1,6 +1,8 @@
+// filepath: /Users/anjanadeegoda/Projects/MIT_Final/PaperlessVotingBooth/PVB_UI_20550219/PVB-Frontend/src/Pages/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import '../Resources/loginPage.css'; // Import the stylesheet
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -20,15 +22,15 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="container">
+      <h2>PVB Admin Login</h2>
       <form onSubmit={handleLogin}>
-        <div>
-          <label>Username:</label>
+        <div className="form-group">
+          <label>Username</label>
           <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
-        <div>
-          <label>Password:</label>
+        <div className="form-group">
+          <label>Password</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         {error && <p>{error}</p>}
