@@ -1,7 +1,6 @@
-// filepath: /Users/anjanadeegoda/Projects/MIT_Final/PaperlessVotingBooth/PVB_UI_20550219/PVB-Frontend/src/Pages/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import '../Resources/loginPage.css'; // Import the stylesheet
 
 const Login = () => {
@@ -22,20 +21,21 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
+    <div className="login_container">
       <h2>PVB Admin Login</h2>
       <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <label>Username</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <div className="login_form-group">
+          <label className="login_label">Username</label>
+          <input className="login_input" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <div className="login_form-group">
+          <label className="login_label">Password</label>
+          <input className="login_input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         {error && <p>{error}</p>}
-        <button type="submit">Login</button>
+        <button className="login_button" type="submit">Login</button>
       </form>
+      <p className="login_description">Don't have an account? <Link to="/register">Register here</Link></p>
     </div>
   );
 };

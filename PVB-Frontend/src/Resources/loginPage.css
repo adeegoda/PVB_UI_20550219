@@ -8,7 +8,7 @@ body {
   margin: 0;
 }
 
-.container {
+.login_container {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -27,20 +27,20 @@ form {
   flex-direction: column;
 }
 
-.form-group {
+.login_form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 10x;
 }
 
-label {
+.login_label {
   font-size: 18px;
   border: none;
   width: 100%;
   box-sizing: border-box;
 }
 
-input {
+.login_input {
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -50,7 +50,7 @@ input {
   margin-bottom: 5px;
 }
 
-button {
+.login_button {
   padding: 10px;
   background-color: #007bff;
   color: #fff;
@@ -65,7 +65,8 @@ button:hover {
   background-color: #0056b3;
 }
 
-p {
+.login_description {
+  margin-top: 10px;
   color: red;
   text-align: center;
   font-size: 14px;
