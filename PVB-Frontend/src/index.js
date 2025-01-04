@@ -11,7 +11,8 @@ import DashboardUI from './Pages/ElectionDashboard';
 import PartyDetailsUI from './Pages/PartyDetailsPage';
 import OTPFraudDetailsUI from './Pages/OTPFraudPage';
 import Login from './Pages/Login';
-import Register from './Pages/Register'; // Import the Register component
+import Register from './Pages/Register';
+import Welcome from './Pages/WelcomePage'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -35,7 +36,8 @@ const PVB_MainUI = () => {
     <Router>
       <div>
         <Switch>
-          <Route exact path="/" component={CoverUI} />
+          <Route exact path="/" component={Welcome} />
+          <Route path='/selectOperation' component={CoverUI}/>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} /> {/* Add the registration route */}
           <PrivateRoute path="/backOffice" component={BackOfficeUI} />

@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 
 const PVB_CoverUI = () => {
-  const [electionDetails, setElectionDetails] = useState([]); // Ensure initial state is an array
+  const [electionDetails, setElectionDetails] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
