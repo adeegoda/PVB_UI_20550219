@@ -1,0 +1,36 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.operationsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+h1.operations {
+  margin-bottom: 20px;
+}
+
+button.operationsPage {
+  width: 400px; 
+  height: 150px; 
+  padding: 10px 20px;
+  font-size: 24px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 70px;
+}
+
+button.operationsPage:hover {
+  background-color: #0056b3;
+}

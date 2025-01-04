@@ -47,7 +47,6 @@ const PVB_CoverUI = () => {
                     </button>
                 </div>
             </div>
-
         </div>
     );
 }

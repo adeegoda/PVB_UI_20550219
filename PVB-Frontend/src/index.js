@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import './Resources/coverPage.css';
-import CoverUI from './Pages/Cover';
+import './Resources/operationsPage.css';
+import Operations from './Pages/OperationsPage';
 import BackOfficeUI from './Pages/BackOffice';
 import EBallotUI from './Pages/EBallot';
 import VerifyOTP from './Pages/VerifyOTP';
@@ -37,9 +37,9 @@ const PVB_MainUI = () => {
       <div>
         <Switch>
           <Route exact path="/" component={Welcome} />
-          <Route path='/selectOperation' component={CoverUI}/>
+          <Route path='/selectOperation' component={Operations}/>
           <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} /> {/* Add the registration route */}
+          <Route path="/register" component={Register} />
           <PrivateRoute path="/backOffice" component={BackOfficeUI} />
           <PrivateRoute path="/verifyOTP" component={VerifyOTP} />
           <PrivateRoute path="/generateOTP" component={GenerateOTP} />
