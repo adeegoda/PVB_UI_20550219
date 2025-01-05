@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import jwtDecode from 'jwt-decode'; // Correct the import statement
 import './Resources/operationsPage.css';
 import Operations from './Pages/OperationsPage';
 import BackOfficeUI from './Pages/BackOffice';
@@ -12,10 +13,18 @@ import PartyDetailsUI from './Pages/PartyDetailsPage';
 import OTPFraudDetailsUI from './Pages/OTPFraudPage';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
-import Welcome from './Pages/WelcomePage'
+import Welcome from './Pages/WelcomePage';
+
+const isTokenExpired = (token) => {
+  if (!token) return true;
+  const decodedToken = jwtDecode(token);
+  const currentTime = Date.now() / 1000;
+  return decodedToken.exp < currentTime;
+};
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = !!localStorage.getItem('token');
+  const token = localStorage.getItem('token');
+  const isAuthenticated = token && !isTokenExpired(token);
 
   return (
     <Route
@@ -24,7 +33,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         isAuthenticated ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+          <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
         )
       }
     />
@@ -37,9 +46,9 @@ const PVB_MainUI = () => {
       <div>
         <Switch>
           <Route exact path="/" component={Welcome} />
-          <Route path='/selectOperation' component={Operations}/>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <PrivateRoute path="/selectOperation" component={Operations} />
           <PrivateRoute path="/backOffice" component={BackOfficeUI} />
           <PrivateRoute path="/verifyOTP" component={VerifyOTP} />
           <PrivateRoute path="/generateOTP" component={GenerateOTP} />

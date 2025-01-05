@@ -17,26 +17,46 @@ const Dashboard = () => {
   const [barChartDataUpdated, setBarChartDataUpdated] = useState(false);
 
   const fetchPartyDetails = async () => {
-    const result = await axios('http://localhost:4000/pvb-api/party-cards');
+    const token = localStorage.getItem('token');
+    const result = await axios.get('http://localhost:4000/pvb-api/party-cards', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     setPartyDetails(result.data);
   };
 
   const fetchPartyVotesData = async () => {
+    const token = localStorage.getItem('token');
     const data = await FetchElectionDetails();
     setElectionDetails(data);
-    const result = await axios('http://localhost:4000/pvb-api/votes-per-party');
+    const result = await axios.get('http://localhost:4000/pvb-api/votes-per-party', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     setData(result.data);
     setBarChartDataUpdated(true);
     setTimeout(() => setBarChartDataUpdated(false), 200);
   };
 
   const fetchTotalValidVotesData = async () => {
-    const result = await axios('http://localhost:4000/pvb-api/total-valid-votes');
+    const token = localStorage.getItem('token');
+    const result = await axios('http://localhost:4000/pvb-api/total-valid-votes',{
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     return result.data.totalValidVotes;
   };
 
   const fetchCancelledVotesData = async () => {
-    const result = await axios('http://localhost:4000/pvb-api/total-cancelled-votes');
+    const token = localStorage.getItem('token');
+    const result = await axios('http://localhost:4000/pvb-api/total-cancelled-votes',{
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     return result.data.totalCancelledVotes;
   };
 
