@@ -35,7 +35,6 @@ const Login = () => {
         {error && <p>{error}</p>}
         <button className="login_button" type="submit">Login</button>
       </form>
-      <p className="login_description">Don't have an account? <Link to="/register">Register here</Link></p>
     </div>
   );
 };

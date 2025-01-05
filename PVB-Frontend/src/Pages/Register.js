@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import '../Resources/loginPage.css'; // Reuse the login page stylesheet
+import '../Resources/registerPage.css';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -25,23 +25,23 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
-      <h2>Register</h2>
+    <div className="registerContainer">
+      <h2 className='registerPage'>Register</h2>
       <form onSubmit={handleRegister}>
         <div className="form-group">
-          <label>Username</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <label className='registerPage_label'>Username</label>
+          <input className='registerPage_input' type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
         <div className="form-group">
-          <label>Password</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <label className='registerPage_label'>Password</label>
+          <input className='registerPage_input' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className="form-group">
-          <label>Confirm Password</label>
-          <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          <label className='registerPage_label'>Confirm Password</label>
+          <input className='registerPage_input' type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
         </div>
         {error && <p>{error}</p>}
-        <button type="submit">Register</button>
+        <button className='registerPage_button' type="submit">Register</button>
       </form>
     </div>
   );
