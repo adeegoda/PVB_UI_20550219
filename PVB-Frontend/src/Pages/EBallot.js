@@ -37,7 +37,7 @@ const PVB_EBallotUI = () => {
 
     useEffect(() => {
         FetchPartyCards(setCards, setLoading)
-    }, []); // Empty dependency array ensures useEffect runs only once on mount
+    }, []);
 
     const [selectedPartyCode, setSelectedPartyCode] = useState('');
     const [selectedPartyNameSinhala, setSelectedPartyNameSinhala] = useState('');

@@ -14,7 +14,7 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:4000/auth/login', { username, password });
       localStorage.setItem('token', response.data.token);
-      history.push('/backOffice');
+      history.push('/selectOperation');
     } catch (error) {
       setError('Invalid username or password');
     }

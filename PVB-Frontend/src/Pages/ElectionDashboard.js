@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Bar } from 'react-chartjs-2';
 import { Pie } from 'react-chartjs-2';
+import jwtDecode from 'jwt-decode';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 import '../Resources/dashboardPage.css';
 import { Divider } from 'semantic-ui-react';
 
+const isTokenExpired = (token) => {
+  if (!token) return true;
+  const decodedToken = jwtDecode(token);
+  const currentTime = Date.now() / 1000;
+  return decodedToken.exp < currentTime;
+};
+
 const Dashboard = () => {
+  const history = useHistory();
   const [electionDetails, setElectionDetails] = useState([]);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [data, setData] = useState([]);
@@ -15,6 +24,16 @@ const Dashboard = () => {
   const [cancelledVotes, setCancelledVotes] = useState(0);
   const [partyDetails, setPartyDetails] = useState([]);
   const [barChartDataUpdated, setBarChartDataUpdated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token || isTokenExpired(token)) {
+      history.push('/login');
+    } else {
+      fetchPartyDetails();
+      fetchPartyVotesData();
+    }
+  }, [history]);
 
   const fetchPartyDetails = async () => {
     const token = localStorage.getItem('token');
@@ -42,7 +61,7 @@ const Dashboard = () => {
 
   const fetchTotalValidVotesData = async () => {
     const token = localStorage.getItem('token');
-    const result = await axios('http://localhost:4000/pvb-api/total-valid-votes',{
+    const result = await axios('http://localhost:4000/pvb-api/total-valid-votes', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -52,7 +71,7 @@ const Dashboard = () => {
 
   const fetchCancelledVotesData = async () => {
     const token = localStorage.getItem('token');
-    const result = await axios('http://localhost:4000/pvb-api/total-cancelled-votes',{
+    const result = await axios('http://localhost:4000/pvb-api/total-cancelled-votes', {
       headers: {
         'Authorization': `Bearer ${token}`
       }

@@ -15,7 +15,7 @@ export const generateOTP = async (nic, setNicErrorMessage, setOtpErrorMessage) =
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`, // Include the authorization token
+        'Authorization': `Bearer ${token}`,
         'voter-nic': nic,
       },
       body: JSON.stringify({ nic: nic })
