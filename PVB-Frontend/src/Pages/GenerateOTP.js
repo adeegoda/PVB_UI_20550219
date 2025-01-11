@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import '../Resources/otpGenerationPage.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { generateOTP } from '../APIOperators/OTPGenerationAPI';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
+import jwtDecode from 'jwt-decode';
 
+const isTokenExpired = (token) => {
+    if (!token) return true;
+    const decodedToken = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+    return decodedToken.exp < currentTime;
+};
 
 const PVB_OTPGenerationUI = () => {
+    const history = useHistory();
     const [otp, setOtp] = useState('');
     const [nic, setNic] = useState('');
     const [nicErrorMessage, setNicErrorMessage] = useState('');
@@ -13,12 +21,16 @@ const PVB_OTPGenerationUI = () => {
     const [electionDetails, setElectionDetails] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await FetchElectionDetails();
-            setElectionDetails(data);
-        };
-
-        fetchData();
+        const token = localStorage.getItem('token');
+        if (!token || isTokenExpired(token)) {
+            history.push('/login');
+        } else {
+            const fetchData = async () => {
+                const data = await FetchElectionDetails();
+                setElectionDetails(data);
+            };
+            fetchData();
+        }
     }, []);
 
     const handleGenerateOTP = async () => {

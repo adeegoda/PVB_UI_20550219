@@ -14,16 +14,27 @@ const OTPFraudDashboard = () => {
   const [OTPFraudsPerID, serOTPFraudsPerID] = useState([]);
 
   const fetchTotalOTPFraudCount = async () => {
+    const token = localStorage.getItem('token');
     const data = await FetchElectionDetails();
     setElectionDetails(data);
-    const result = await axios('http://localhost:4000/pvb-api/fraud-attepmts');
+    const result = await axios('http://localhost:4000/pvb-api/fraud-attepmts', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     return result.data.totalNICFraudCount;
   };
 
   const fetchOTPFraudPerIDCount = async (nic) => {
-    const result = await axios.post('http://localhost:4000/pvb-api/fraud-attepmts-perNIC', {
-      nic: nic
-    });
+    const token = localStorage.getItem('token');
+    const result = await axios.post('http://localhost:4000/pvb-api/fraud-attepmts-perNIC',
+      { nic: nic },
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }
+    );
     return result.data.perNICFraudCount;
   };
 
@@ -84,7 +95,7 @@ const OTPFraudDashboard = () => {
             <button className='backButton' name='goToBackOfficePage'>
               <Link className='backButtonLinks' to='/backOffice'>
                 <p className='backButtonLabels'>
-                  ප්‍රධාන මෙනුවට | To Main Menu | முதன்மை மெனுவிற்கு
+                  කාර්යාල මෙනුවට | To Office Menu | அலுவலக மெனுவிற்கு
                 </p>
               </Link>
             </button>

@@ -3,29 +3,51 @@ import axios from 'axios';
 import { FetchElectionDetails } from '../APIOperators/ElectionDetailsAPI';
 import '../Resources/partyDetailsPage.css';
 import '../Resources/responsiveContents.css';
-import { Link } from 'react-router-dom';
-import { Divider } from 'semantic-ui-react';
+import { Link, useHistory } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+
+const isTokenExpired = (token) => {
+    if (!token) return true;
+    const decodedToken = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+    return decodedToken.exp < currentTime;
+};
 
 const PartyDetailsPage = () => {
+    const history = useHistory();
     const [partyDetails, setPartyDetails] = useState([]);
     const [electionDetails, setElectionDetails] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await FetchElectionDetails();
-            setElectionDetails(data);
-        };
-        fetchData();
+        const token = localStorage.getItem('token');
+        if (!token || isTokenExpired(token)) {
+            history.push('/login');
+        } else {
+            const fetchData = async () => {
+                const data = await FetchElectionDetails();
+                setElectionDetails(data);
+            };
+            fetchData();
+        }
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/pvb-api/party-cards')
-            .then(response => {
-                setPartyDetails(response.data);
+        const token = localStorage.getItem('token');
+        if (!token || isTokenExpired(token)) {
+            history.push('/login');
+        } else {
+            axios.get('http://localhost:4000/pvb-api/party-cards', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
-            .catch(error => {
-                console.error(`There was an error retrieving the data: ${error}`);
-            });
+                .then(response => {
+                    setPartyDetails(response.data);
+                })
+                .catch(error => {
+                    console.error(`There was an error retrieving the data: ${error}`);
+                });
+        }
     }, []);
 
     return (

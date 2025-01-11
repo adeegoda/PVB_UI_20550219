@@ -4,7 +4,7 @@ body, html {
   font-family: Arial, sans-serif;
 }
 
-.backOfficeContainer {
+.welcomeContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,18 +13,13 @@ body, html {
   text-align: center;
 }
 
-h1.backOfficeHeader {
-  margin-bottom: 50px;
+h1.welcome {
+  margin-bottom: 20px;
+  font-size: 48px;
 }
 
-.backOfficeLinks:hover {
-  color: #f1f1f1;
-}
-
-.backOfficeButtons {
-  width: 400px; 
-  height: 150px; 
-  padding: 10px 20px;
+button.welcomeButton {
+  padding: 20px 40px;
   font-size: 24px;
   cursor: pointer;
   background-color: #007bff;
@@ -32,5 +27,8 @@ h1.backOfficeHeader {
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  margin-bottom: 40px;
+}
+
+button.welcomeButton:hover {
+  background-color: #0056b3;
 }
