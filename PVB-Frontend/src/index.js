@@ -45,7 +45,8 @@ const PVB_MainUI = () => {
     <Router>
       <div>
         <Switch>
-          <Route exact path="/" component={Welcome} />
+          <Route exact path="/" component={Login} />
+          <Route path="/welcome" component={Welcome} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <PrivateRoute path="/selectOperation" component={Operations} />

@@ -74,7 +74,7 @@ const PVB_EBallotUI = () => {
 
     useEffect(() => {
         if (votingCompleted) {
-            history.replace('/');
+            history.replace('/welcome');
         }
     }, [votingCompleted, history]);
 
