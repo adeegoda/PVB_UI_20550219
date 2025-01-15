@@ -13,6 +13,8 @@ export const SubmitConfirmedVote = (selectedPartyCode) => {
         .then(
             (response) => {
                 console.log(response);
+                // Remove the otptoken from localStorage
+                localStorage.removeItem('otp-token');
             },
             (error) => {
                 console.log(error);
@@ -33,6 +35,7 @@ export const SubmitCancelledVote = (status) => {
         .then(
             (response) => {
                 console.log(response);
+                localStorage.removeItem('otp-token');
             },
             (error) => {
                 console.log(error);
