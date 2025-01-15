@@ -24,13 +24,15 @@ const isTokenExpired = (token) => {
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const token = localStorage.getItem('token');
+  const otptoken = localStorage.getItem('otp-token');
   const isAuthenticated = token && !isTokenExpired(token);
+  const isOTPAuthenticated = otptoken && !isTokenExpired(otptoken);
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated ? (
+        isAuthenticated || isOTPAuthenticated ? (
           <Component {...props} />
         ) : (
           <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
