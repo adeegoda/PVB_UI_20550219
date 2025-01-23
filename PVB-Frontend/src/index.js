@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import jwtDecode from 'jwt-decode'; // Correct the import statement
+import jwtDecode from 'jwt-decode';
 import './Resources/operationsPage.css';
 import Operations from './Pages/OperationsPage';
 import BackOfficeUI from './Pages/BackOffice';
@@ -22,20 +22,24 @@ const isTokenExpired = (token) => {
   return decodedToken.exp < currentTime;
 };
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, requiresOTP, ...rest }) => {
   const token = localStorage.getItem('token');
+  const otptoken = localStorage.getItem('otp-token');
   const isAuthenticated = token && !isTokenExpired(token);
+  const isOTPAuthenticated = otptoken && !isTokenExpired(otptoken);
 
   return (
     <Route
       {...rest}
-      render={(props) =>
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-        )
-      }
+      render={(props) => {
+        if (isAuthenticated && (!requiresOTP || isOTPAuthenticated)) {
+          return <Component {...props} />;
+        } else if (requiresOTP && (!otptoken || isTokenExpired(otptoken))) {
+          return <Redirect to={{ pathname: '/welcome', state: { from: props.location } }} />;
+        } else {
+          return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
+        }
+      }}
     />
   );
 };
@@ -55,7 +59,7 @@ const PVB_MainUI = () => {
           <PrivateRoute path="/generateOTP" component={GenerateOTP} />
           <PrivateRoute path="/dashboard" component={DashboardUI} />
           <PrivateRoute path="/partyDetails" component={PartyDetailsUI} />
-          <PrivateRoute path="/votingUI" component={EBallotUI} />
+          <PrivateRoute path="/votingUI" component={EBallotUI} requiresOTP={true} />
           <PrivateRoute path="/OTPFraudUI" component={OTPFraudDetailsUI} />
         </Switch>
       </div>
