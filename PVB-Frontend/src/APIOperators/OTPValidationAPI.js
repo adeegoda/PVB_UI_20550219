@@ -13,11 +13,12 @@ export const validateOTP = async (history, otp, setErrorMessage) => {
             body: JSON.stringify({ otp: otp })
         });
         const data = await response.json();
-        if (response.status === 202) {
-            return data.message;
+        if (response.status === 202 && data.otptoken) {
+            return { message: data.message, otptoken: data.otptoken };
         }
-        return data.message;
+        return { message: data.message, otptoken: null };
     } catch (error) {
         console.error('Error verifying OTP:', error);
+        setErrorMessage('Error verifying OTP');
     }
 }

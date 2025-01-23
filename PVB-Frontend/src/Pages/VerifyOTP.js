@@ -17,16 +17,16 @@ function VerifyOTP() {
             const data = await FetchElectionDetails();
             setElectionDetails(data);
         };
-
         fetchData();
     }, []);
 
     const handleOTPVerification = async () => {
         const validatedResult = await validateOTP(history, otp, setErrorMessage);
-        if (validatedResult === 'OTP is valid') {
+        if (validatedResult.message === 'OTP is valid') {
             setOTPValidated(true);
+            localStorage.setItem('otp-token', validatedResult.otptoken);
         }
-        setVerificationResult(validatedResult);
+        setVerificationResult(validatedResult.message);
     };
 
     const handleOTPChange = (e) => {
